@@ -1,0 +1,40 @@
+<!--miniprogram/pages/index/index.wxml-->
+<cu-custom bgColor="bg-gradual-blue">
+	<view slot="content">首页</view>
+</cu-custom>
+
+<view class="padding-lr bg-white">
+	<view class="solid-bottom padding">
+    	<view class="cu-avatar round lg margin-left" style="background-image:url({{userinfo.avatar}});">
+    </view>
+    <text class="text-xl margin-left-xl">{{userinfo.username}}</text>
+  </view>
+  <view class="padding-lr">
+    <view class="flex">
+		<view class="flex-sub padding-sm margin-xs radius">{{userinfo.company}}</view>
+		<view class="flex-sub padding-sm margin-xs radius">{{userinfo.title}}</view>
+    </view>
+    <view class="flex padding-lr padding-bottom">
+		<view class="flex-sub radius">{{userinfo.phone}}</view>
+    </view>
+	<view class="flex padding-lr padding-bottom">
+		<view class="flex-sub radius">{{userinfo.mail}}</view>
+    </view>
+  </view>
+</view>
+
+<view class="cu-list grid col-2 margin-top">
+	<view class="cu-item" wx:for="{{dailyDataList}}" wx:key="id">
+		<view class="value">{{item.value}}</view>
+		<view class="label">{{item.label}}</view>
+	</view>
+</view>
+
+<view class="cu-list grid col-3">
+	<view class="cu-item" wx:for="{{functionList}}" wx:key="id">
+		<view class="cuIcon-cu-image">
+			<image class="icon" src="{{item.icon}}"></image>
+		</view>
+		<view class="label">{{item.label}}</view>
+	</view>
+</view>

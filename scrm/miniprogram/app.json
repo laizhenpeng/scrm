@@ -1,0 +1,57 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/relation/relation",
+        "pages/data/data",
+        "pages/user/user",
+        "pages/detail/detail",
+        "pages/edit/edit",
+        "pages/card/card",
+        "pages/chat/chat"
+    ],
+    "window": {
+        "backgroundColor": "#F6F6F6",
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#F6F6F6",
+        "navigationBarTitleText": "SCRM",
+        "navigationStyle": "custom",
+        "navigationBarTextStyle": "black"
+    },
+    "usingComponents": {
+        "cu-custom": "components/cu-custom/cu-custom"
+    },
+    "tabBar": {
+        "color": "#333333",
+        "selectedColor": "#0E9ED9",
+        "borderStyle": "black",
+        "backgroundColor": "#ffffff",
+        "list": [
+            {
+                "text": "首页",
+                "pagePath": "pages/index/index",
+                "iconPath": "images/index_inactive.png",
+                "selectedIconPath": "images/index.png"
+            },
+            {
+                "text": "关系",
+                "pagePath": "pages/relation/relation",
+                "iconPath": "images/relation_inactive.png",
+                "selectedIconPath": "images/relation.png"
+            },
+            {
+                "text": "数据",
+                "pagePath": "pages/data/data",
+                "iconPath": "images/data_inactive.png",
+                "selectedIconPath": "images/data.png"
+            },
+            {
+                "text": "我的",
+                "pagePath": "pages/user/user",
+                "iconPath": "images/user_inactive.png",
+                "selectedIconPath": "images/user.png"
+            }
+        ]
+    },
+    "sitemapLocation": "sitemap.json",
+    "style": "v2"
+}
