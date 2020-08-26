@@ -2,7 +2,7 @@
 <cu-custom bgColor="bg-gradual-blue">
 	<view slot="content">首页</view>
 </cu-custom>
-
+<!-- Todo： 名片模板 -->
 <view class="padding-lr bg-white">
 	<view class="solid-bottom padding">
     	<view class="cu-avatar round lg margin-left" style="background-image:url({{userinfo.avatar}});">
@@ -18,20 +18,20 @@
 		<view class="flex-sub radius">{{userinfo.phone}}</view>
     </view>
 	<view class="flex padding-lr padding-bottom">
-		<view class="flex-sub radius">{{userinfo.mail}}</view>
+		<view class="flex-sub radius">{{userinfo.email}}</view>
     </view>
   </view>
 </view>
 
 <view class="cu-list grid col-2 margin-top">
-	<view class="cu-item" wx:for="{{dailyDataList}}" wx:key="id">
+	<view class="cu-item" wx:for="{{indexDataList}}" wx:key="index">
 		<view class="value">{{item.value}}</view>
 		<view class="label">{{item.label}}</view>
 	</view>
 </view>
 
 <view class="cu-list grid col-3">
-	<view class="cu-item" wx:for="{{functionList}}" wx:key="id">
+	<view class="cu-item" wx:for="{{functions}}" wx:key="index">
 		<view class="cuIcon-cu-image">
 			<image class="icon" src="{{item.icon}}"></image>
 		</view>

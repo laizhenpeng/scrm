@@ -7,7 +7,9 @@ Page({
     data: {
         tabList: ["消息", "客户"],
         TabCur: 0,
-        scrollLeft:0
+        scrollLeft:0,
+        messages: [],
+        customers: []
     },
     tabSelect(e) {
         this.setData({

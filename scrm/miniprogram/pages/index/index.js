@@ -1,45 +1,35 @@
 // miniprogram/pages/index/index.js
+const app = getApp()
+
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        userinfo: {
-            avatar: "",
-            username: "赖圳鹏",
-            company: "ABC公司",
-            title: "前端开发实习生",
-            phone: "18811397969",
-            mail: "laizhenpeng17@gmail.com"
-        },
-        dailyDataList: [{
-            id: "0",
+        loginStatus: true, //是否已登录，false为否，true为是
+        userInfo: {},
+        openid: "",
+        indexDataList: [{
             label: "今日访客数",
             value: "0"
         }, {
-            id: "1",
             label: "今日新客户",
             value: "0"
         }],
-        functionList: [{
-            id: "0",
+        functions: [{
             label: "查看",
             icon: "/images/view.png"
         }, {
-            id: "1",
             label: "编辑",
             icon: "/images/edit.png"
         }, {
-            id: "2",
             label: "名片",
             icon: "/images/card.png"
         }, {
-            id: "3",
             label: "扫描",
             icon: "/images/scan.png"
         }, {
-            id: "4",
             label: "分享",
             icon: "/images/share.png"
         }]
@@ -50,6 +40,35 @@ Page({
      */
     onLoad: function (options) {
 
+        if (!("avatarUrl" in app.globalData.userInfo)) {
+            app.userInfoCallbacks = res => {
+                this.setData({
+                    userInfo: res.userInfo
+                })
+            }
+        }
+        if (!app.globalData.openid) {
+            app.openidCallbacks = res => {
+                this.setData({
+                    openid: res.result.openid
+                })
+            }
+        }
+
+        let that = this;
+        const db = wx.cloud.database();
+        const _ = db.command;
+        db.collection('indexData').where({
+            openid: that.openid
+        })
+        .get({
+            success: function(res) {
+                that.setData({
+                    "indexDataList[0].value": res.data[0].new_visitor,
+                    "indexDataList[1].value": res.data[0].new_customer
+                })
+            }
+        })
     },
 
     /**

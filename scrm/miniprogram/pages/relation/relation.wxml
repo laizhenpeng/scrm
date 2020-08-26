@@ -5,12 +5,12 @@
 
 <scroll-view scroll-x class="bg-white nav">
 	<view class="flex text-center">
-		<view class="cu-item flex-sub {{index==TabCur?'text-blue cur':''}}" wx:for="{{tabList}}" wx:key bindtap="tabSelect" data-id="{{index}}">
+		<view class="cu-item flex-sub {{index==TabCur?'text-blue cur':''}}" wx:for="{{tabList}}" wx:key="index" bindtap="tabSelect" data-id="{{index}}">
 			{{item}}
 		</view>
 	</view>
 </scroll-view>
-
+<!-- Todo：列表 -->
 <view wx:if="{{TabCur==0}}">
 
 </view>

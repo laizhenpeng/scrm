@@ -1,63 +1,53 @@
 // miniprogram/pages/data/data.js
+const app = getApp()
+
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
+        tabList: ["消息", "客户"],
+        TabCur: 0,
+        scrollLeft:0,
         msgDataList: [{
-            id: "0",
             label: "今日消息数",
             value: "0"
         }, {
-            id: "1",
             label: "今日接受",
             value: "0"
         }, {
-            id: "2",
             label: "今日发送",
             value: "0"
         }, {
-            id: "3",
             label: "消息总数",
             value: "0"
         }, {
-            id: "4",
             label: "本周消息数",
             value: "0"
         }, {
-            id: "5",
             label: "本月消息数",
             value: "0"
         }],
         csrDataList: [{
-            id: "0",
             label: "访客总数",
             value: "0"
         }, {
-            id: "1",
             label: "本周来访",
             value: "0"
         }, {
-            id: "2",
             label: "本月来访",
             value: "0"
         }, {
-            id: "3",
             label: "客户总数",
             value: "0"
         }, {
-            id: "4",
             label: "本周新增",
             value: "0"
         }, {
-            id: "5",
             label: "本月新增",
             value: "0"
         }],
-        tabList: ["消息", "客户"],
-        TabCur: 0,
-        scrollLeft:0
     },
     tabSelect(e) {
         this.setData({
@@ -70,7 +60,30 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        let that = this;
+        const db = wx.cloud.database();
+        const _ = db.command;
+        db.collection('schematicsData').where({
+            openid: app.globalData.openid
+        })
+        .get({
+            success: function(res) {
+                that.setData({
+                    "msgDataList[0].value": res.data[0].msg_daily,
+                    "msgDataList[1].value": res.data[0].msg_receive,
+                    "msgDataList[2].value": res.data[0].msg_send,
+                    "msgDataList[3].value": res.data[0].msg_total,
+                    "msgDataList[4].value": res.data[0].msg_weekly,
+                    "msgDataList[5].value": res.data[0].msg_monthly,
+                    "csrDataList[0].value": res.data[0].vis_total,
+                    "csrDataList[1].value": res.data[0].vis_weekly,
+                    "csrDataList[2].value": res.data[0].vis_monthly,
+                    "csrDataList[3].value": res.data[0].csr_total,
+                    "csrDataList[4].value": res.data[0].csr_weekly,
+                    "csrDataList[5].value": res.data[0].csr_monthly
+                })
+            }
+        })
     },
 
     /**
