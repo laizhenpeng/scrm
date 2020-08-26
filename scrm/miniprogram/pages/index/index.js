@@ -39,7 +39,6 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
         if (!("avatarUrl" in app.globalData.userInfo)) {
             app.userInfoCallbacks = res => {
                 this.setData({
@@ -54,12 +53,11 @@ Page({
                 })
             }
         }
-
         let that = this;
         const db = wx.cloud.database();
         const _ = db.command;
         db.collection('indexData').where({
-            openid: that.openid
+            openid: this.openid
         })
         .get({
             success: function(res) {
