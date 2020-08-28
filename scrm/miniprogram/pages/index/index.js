@@ -8,7 +8,9 @@ Page({
      */
     data: {
         loginStatus: true, //是否已登录，false为否，true为是
+        isEdit: false,
         userInfo: {},
+        detailedInfo: {},
         openid: "",
         indexDataList: [{
             label: "今日访客数",
@@ -46,6 +48,11 @@ Page({
                 })
             }
         }
+        else {
+            this.setData({
+                userInfo: app.globalData.userInfo
+            })
+        }
         if (!app.globalData.openid) {
             app.openidCallbacks = res => {
                 this.setData({
@@ -53,20 +60,57 @@ Page({
                 })
             }
         }
+        else {
+            this.setData({
+                openid: app.globalData.openid
+            })
+        }
+        
         let that = this;
         const db = wx.cloud.database();
         const _ = db.command;
-        db.collection('indexData').where({
-            openid: this.openid
+        
+        db.collection('userinfo').where({
+            openid: that.openid
         })
         .get({
             success: function(res) {
+                if (res.data.length != 0) {
+                    app.globalData.detailedInfo = res.data[0]
+                    that.setData({
+                        isEdit: true,
+                        detailedInfo: res.data[0]
+                    })
+                }
+                else {
+                    that.setData({
+                        isEdit: false
+                    })
+                }
+            }
+        })
+
+        db.collection('data')
+        .get({
+            success: function(res) {
                 that.setData({
-                    "indexDataList[0].value": res.data[0].new_visitor,
-                    "indexDataList[1].value": res.data[0].new_customer
+                    "indexDataList[0].value": res.data[0].vis_daily,
+                    "indexDataList[1].value": res.data[0].csr_daily
                 })
             }
         })
+    },
+
+    scanQRCode(e) {
+        wx.scanCode({
+            success (res) {
+                console.log(res)
+            }
+        });
+    },
+
+    shareInfo(e) {
+        this.onShareAppMessage()
     },
 
     /**

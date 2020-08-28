@@ -4,6 +4,7 @@
         "pages/relation/relation",
         "pages/data/data",
         "pages/user/user",
+        "pages/view/view",
         "pages/detail/detail",
         "pages/edit/edit",
         "pages/card/card",

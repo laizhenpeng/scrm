@@ -36,14 +36,14 @@ Page({
     },
 
     // bindChange
-    bindEducationChange: function (e) {
-        this.setData({
-            educationIndex: e.detail.value
-        })
-    },
     bindBirthdayChange: function (e) {
         this.setData({
             birthday: e.detail.value
+        })
+    },
+    bindEducationChange: function (e) {
+        this.setData({
+            educationIndex: e.detail.value
         })
     },
 
@@ -100,7 +100,6 @@ Page({
         })
     },
 
-
     clearInfo: function () {
         this.setData({
             username: null,
@@ -127,7 +126,13 @@ Page({
                 content: "请正确填写年龄！"
             })
         }
-        else if (that.data.username == null || that.data.birthday == null || that.data.educationIndex == null) {
+        if (isNaN(that.data.phone)) {
+            wx.showModal({
+                title: "信息提示",
+                content: "请正确填写手机号码！"
+            })
+        }
+        else if (that.data.username == null || that.data.age == null || that.data.birthday == null || that.data.educationIndex == null) {
             wx.showModal({
                 title: "信息提示",
                 content: "请完整填写基本信息！"
@@ -152,7 +157,62 @@ Page({
             })
         }
         else {
-            // 写
+            const db = wx.cloud.database();
+            const _ = db.command;
+            db.collection('userinfo').where({
+                openid: that.data.openid
+            })
+            .get({
+                success: function(res) {
+                    if (res.data.length == 0) {
+                        db.collection('userinfo').add({
+                            data: {
+                                openid: that.data.openid,
+                                username: that.data.username,
+                                age: that.data.age,
+                                birthday: that.data.birthday,
+                                education: that.data.educationList[educationIndex],
+                                company: that.data.company,
+                                title: that.data.title,
+                                school: that.data.school,
+                                department: that.data.department,
+                                phone: that.data.phone,
+                                email: that.data.email,
+                                address: that.data.address,
+                                introduction: that.data.introduction
+                            },
+                            success: function(res) {
+                                //成功 and 返回
+                                console.log(res)
+                            }
+                        })
+                    }
+                    else {
+                        let id = res.data[0]._id
+                        db.collection('userinfo').doc(id).set({
+                            data: {
+                                openid: that.data.openid,
+                                username: that.data.username,
+                                age: that.data.age,
+                                birthday: that.data.birthday,
+                                education: that.data.educationList[educationIndex],
+                                company: that.data.company,
+                                title: that.data.title,
+                                school: that.data.school,
+                                department: that.data.department,
+                                phone: that.data.phone,
+                                email: that.data.email,
+                                address: that.data.address,
+                                introduction: that.data.introduction
+                            },
+                            success: function(res) {
+                                //成功 and 返回
+                                console.log(res)
+                            }
+                        })
+                    }
+                }
+            })
         }
     },
     /**

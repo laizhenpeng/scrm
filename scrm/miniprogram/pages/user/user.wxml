@@ -5,22 +5,24 @@
 
 <view class="padding-lr bg-white">
 	<view class="solid-bottom padding">
-    	<view class="cu-avatar round lg margin-left" style="background-image:url({{userinfo.avatar}});">
-    </view>
-    <text class="text-xl margin-left-xl">{{userinfo.username}}</text>
-  </view>
-  <view class="padding-lr">
-    <view class="flex">
-		<view class="flex-sub padding-sm margin-xs radius">{{userinfo.company}}</view>
-		<view class="flex-sub padding-sm margin-xs radius">{{userinfo.title}}</view>
-    </view>
-    <view class="flex padding-lr padding-bottom">
-		<view class="flex-sub radius">{{userinfo.phone}}</view>
-    </view>
-	<view class="flex padding-lr padding-bottom">
-		<view class="flex-sub radius">{{userinfo.mail}}</view>
-    </view>
-  </view>
+		<view class="cu-avatar round lg margin-left" style="background-image:url({{userInfo.avatarUrl}})"></view>
+    <text class="text-xl margin-left-xl">{{detailedInfo.username}}</text>
+	</view>
+	<view class="padding-lr">
+		<view class="flex">
+			<view class="flex-sub padding-xs radius text-xl">{{detailedInfo.company}}</view>
+			<view class="flex-sub padding-xs radius text-xl">{{detailedInfo.title}}</view>
+		</view>
+		<view class="flex">
+			<view class="flex-sub padding-left-xs padding-bottom-xs radius text-lg">TEL: {{detailedInfo.phone}}</view>
+		</view>
+		<view class="flex">
+			<view class="flex-sub padding-left-xs padding-bottom-sm radius text-lg">MAIL: {{detailedInfo.email}}</view>
+		</view>
+		<view class="flex">
+			<view class="flex-sub padding-left-xs padding-bottom-xs radius text-lg">ADD: {{detailedInfo.address}}</view>
+		</view>
+	</view>
 </view>
 
 <view class="cu-list menu margin-top">

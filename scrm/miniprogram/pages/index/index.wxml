@@ -2,22 +2,34 @@
 <cu-custom bgColor="bg-gradual-blue">
 	<view slot="content">首页</view>
 </cu-custom>
-<!-- Todo： 名片模板 -->
+
 <view class="padding-lr bg-white">
 	<view class="solid-bottom padding">
-    	<view class="cu-avatar round lg margin-left" style="background-image:url({{userInfo.avatarUrl}});">
-    </view>
-    <text class="text-xl margin-left-xl">{{userInfo.nickName}}</text>
-  </view>
-  <view class="padding-lr">
-    <view class="flex">
-		<view class="flex-sub padding-sm margin-xs radius">{{userInfo.province}}</view>
-		<view class="flex-sub padding-sm margin-xs radius">{{userInfo.city}}</view>
-    </view>
-    <view class="flex padding-lr padding-bottom">
-		<view class="flex-sub radius">{{userInfo.language}}</view>
-    </view>
-  </view>
+		<view class="cu-avatar round lg margin-left" style="background-image:url({{userInfo.avatarUrl}})"></view>
+    <text class="text-xl margin-left-xl">{{detailedInfo.username}}</text>
+		<!-- <view wx:if="{{userInfo.gender=='1'}}" class="cu-tag badge bg-blue" >♂</view>
+      	<view wx:else class="cu-tag badge bg-pink" >♀</view> -->
+	</view>
+	<view wx:if="{{isEdit}}" class="padding-lr">
+		<view class="flex">
+			<view class="flex-sub padding-xs radius text-xl">{{detailedInfo.company}}</view>
+			<view class="flex-sub padding-xs radius text-xl">{{detailedInfo.title}}</view>
+		</view>
+		<view class="flex">
+			<view class="flex-sub padding-left-xs padding-bottom-xs radius text-lg">TEL: {{detailedInfo.phone}}</view>
+		</view>
+		<view class="flex">
+			<view class="flex-sub padding-left-xs padding-bottom-sm radius text-lg">MAIL: {{detailedInfo.email}}</view>
+		</view>
+		<view class="flex">
+			<view class="flex-sub padding-left-xs padding-bottom-xs radius text-lg">ADD: {{detailedInfo.address}}</view>
+		</view>
+	</view>
+	<view wx:else class="padding-lr">
+		<view class="flex">
+			<view class="flex-sub padding radius text-xl">请完善个人资料</view>
+		</view>
+	</view>
 </view>
 
 <view class="cu-list grid col-2 margin-top">
@@ -29,7 +41,7 @@
 
 <view class="cu-list grid col-3">
 	<view class="cu-item">
-		<navigator bindtap="viewInfo" url="/pages/view/view">
+		<navigator url="/pages/view/view">
 			<view class="cuIcon-cu-image">
 				<image class="icon" src="{{functions[0].icon}}"></image>
 			</view>
@@ -37,7 +49,7 @@
 		</navigator>
 	</view>
 	<view class="cu-item">
-		<navigator bindtap="editInfo" url="/pages/edit/edit">
+		<navigator url="/pages/edit/edit">
 			<view class="cuIcon-cu-image">
 				<image class="icon" src="{{functions[1].icon}}"></image>
 			</view>
@@ -45,7 +57,7 @@
 		</navigator>
 	</view>
 	<view class="cu-item">
-		<navigator bindtap="chooseCard" url="/pages/card/card">
+		<navigator url="/pages/card/card">
 			<view class="cuIcon-cu-image">
 				<image class="icon" src="{{functions[2].icon}}"></image>
 			</view>
@@ -53,19 +65,19 @@
 		</navigator>
 	</view>
 	<view class="cu-item">
-		<navigator bindtap="scan" url="">
+		<view bindtap="scanQRCode">
 			<view class="cuIcon-cu-image">
 				<image class="icon" src="{{functions[3].icon}}"></image>
 			</view>
 			<view class="label">{{functions[3].label}}</view>
-		</navigator>
+		</view>
 	</view>
 	<view class="cu-item">
-		<navigator bindtap="share" url="">
+		<view bindtap="shareInfo">
 			<view class="cuIcon-cu-image">
 				<image class="icon" src="{{functions[4].icon}}"></image>
 			</view>
 			<view class="label">{{functions[4].label}}</view>
-		</navigator>
+		</view>
 	</view>
 </view>

@@ -29,7 +29,6 @@ App({
         if (res.authSetting['scope.userInfo']) {
           wx.getUserInfo({
             success: res => {
-              // console.log(res.userInfo)
               this.globalData.userInfo = res.userInfo
               if (this.userInfoCallbacks) {
                 this.userInfoCallbacks(res)
@@ -37,6 +36,9 @@ App({
             }
           })
         }
+      },
+      fail: err => {
+        console.error('获取用户信息失败', err)
       }
     })
   
@@ -57,7 +59,8 @@ App({
   },
 
   globalData: {
+    openid: "",
     userInfo: {},
-    openid: ""
+    detailedInfo: {}
   }
 })

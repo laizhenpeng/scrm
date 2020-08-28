@@ -7,6 +7,7 @@ Page({
      * 页面的初始数据
      */
     data: {
+        openid: "",
         tabList: ["消息", "客户"],
         TabCur: 0,
         scrollLeft:0,
@@ -60,11 +61,15 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        this.setData({
+            openid: app.globalData.openid
+        })
+        
         let that = this;
         const db = wx.cloud.database();
         const _ = db.command;
-        db.collection('schematicsData').where({
-            openid: app.globalData.openid
+        db.collection('data').where({
+            openid: that.data.openid
         })
         .get({
             success: function(res) {

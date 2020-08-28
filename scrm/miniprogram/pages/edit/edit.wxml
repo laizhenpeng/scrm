@@ -1,6 +1,6 @@
 <!--miniprogram/pages/edit/edit.wxml-->
 <cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
-	<view slot="backText">返回</view>
+    <view slot="backText">返回</view>
 	<view slot="content">编辑</view>
 </cu-custom>
 
@@ -91,18 +91,6 @@
 </form>
 
 <view class="tail flex solid-bottom padding justify-between">
-  <button class="cu-btn bg-blue light shadow" bindtap="clearInfo">清空</button>
-  <button class="cu-btn bg-blue shadow" bindtap="submitInfo">提交</button>
+    <button class="cu-btn bg-blue light shadow" bindtap="clearInfo">清空</button>
+    <button class="cu-btn bg-blue shadow" bindtap="submitInfo">提交</button>
 </view>
-
-
-<!-- <view class="cu-modal {{modalName=='DigitModal'?'show':''}}">
-  <view class="cu-dialog">
-    <view class="cu-bar bg-white justify-end">
-      <view class="content">这里只能填写数字哦~</view>
-      <view class="action" bindtap="digitalOnly">
-        <text class="cuIcon-close text-red"></text>
-      </view>
-    </view>
-  </view>
-</view> -->

@@ -1,4 +1,4 @@
-// miniprogram/pages/user/user.js
+// miniprogram/pages/view/view.js
 const app = getApp()
 
 Page({

@@ -1,0 +1,92 @@
+<!--miniprogram/pages/view/view.wxml-->
+<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+	<view slot="backText">返回</view>
+	<view slot="content">查看</view>
+</cu-custom>
+
+<view class="padding-lr bg-white cu-list menu sm-border card-menu margin-top">
+	<view class="solid-bottom padding">
+		<view class="cu-avatar round lg margin-left" style="background-image:url({{userInfo.avatarUrl}})"></view>
+		<text class="text-xl margin-left-xl">{{detailedInfo.username}}</text>
+	</view>
+	<view class="padding-lr">
+        <view class="flex">
+            <view class="flex-sub padding-xs radius text-xl">个人简介: {{detailedInfo.introduction}}</view>
+        </view>
+	</view>
+</view>
+
+<view class="cu-list menu sm-border card-menu margin-top">
+	<view class="cu-item">
+		<view class="content">
+			<text class="cuIcon-favor text-grey"></text>
+			<text class="text-xl">年龄: {{detailedInfo.age}}</text>
+		</view>
+	</view>
+	<view class="cu-item">
+		<view class="content">
+			<text class="cuIcon-favor text-grey"></text>
+			<text class="text-xl">生日: {{detailedInfo.birthday}}</text>
+		</view>
+	</view>
+    <view class="cu-item">
+		<view class="content">
+			<text class="cuIcon-favor text-grey"></text>
+			<text class="text-xl">家乡: {{userInfo.city}},  {{userInfo.province}}, {{userInfo.country}}</text>
+		</view>
+	</view>
+    <view class="cu-item">
+		<view class="content">
+			<text class="cuIcon-favor text-grey"></text>
+			<text class="text-xl">学历: {{detailedInfo.education}}</text>
+		</view>
+	</view>
+</view>
+
+<view class="cu-list menu sm-border card-menu margin-top">
+    <view class="cu-item">
+		<view class="content">
+			<text class="cuIcon-favor text-grey"></text>
+			<text class="text-xl">公司: {{detailedInfo.company}}</text>
+		</view>
+	</view>
+    <view class="cu-item">
+		<view class="content">
+			<text class="cuIcon-favor text-grey"></text>
+			<text class="text-xl">职位: {{detailedInfo.title}}</text>
+		</view>
+	</view>
+    <view class="cu-item">
+		<view class="content">
+			<text class="cuIcon-favor text-grey"></text>
+			<text class="text-xl">学校: {{detailedInfo.school}}</text>
+		</view>
+	</view>
+    <view class="cu-item">
+		<view class="content">
+			<text class="cuIcon-favor text-grey"></text>
+			<text class="text-xl">院系: {{detailedInfo.department}}</text>
+		</view>
+	</view>
+</view>
+
+<view class="cu-list menu sm-border card-menu margin-tb">
+    <view class="cu-item">
+		<view class="content">
+			<text class="cuIcon-favor text-grey"></text>
+			<text class="text-xl">手机: {{detailedInfo.phone}}</text>
+		</view>
+	</view>
+    <view class="cu-item">
+		<view class="content">
+			<text class="cuIcon-favor text-grey"></text>
+			<text class="text-xl">邮箱: {{detailedInfo.email}}</text>
+		</view>
+	</view>
+    <view class="cu-item">
+		<view class="content">
+			<text class="cuIcon-favor text-grey"></text>
+			<text class="text-xl">地址: {{detailedInfo.address}}</text>
+		</view>
+	</view>
+</view>
