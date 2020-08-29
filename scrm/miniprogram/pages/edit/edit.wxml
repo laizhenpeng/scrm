@@ -1,25 +1,25 @@
 <!--miniprogram/pages/edit/edit.wxml-->
 <cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
     <view slot="backText">返回</view>
-	<view slot="content">编辑</view>
+    <view slot="content">编辑</view>
 </cu-custom>
 
 <form>
     <view class="cu-bar bg-white light solid-bottom margin-top">
-        <view class="action">
-            <text class="text-bold cuIcon-titles text-blue"></text>
-            <text class="text-bold">基本信息</text>
-        </view>
-    </view>
-    <view class="cu-form-group">
+		<view class="action">
+			<text class="text-bold cuIcon-titles text-blue"></text>
+			<text class="text-bold">基本信息</text>
+		</view>
+	</view>
+	<view class="cu-form-group">
 		<view class="title">姓名</view>
 		<input placeholder="请输入姓名" value="{{username}}" bindinput="usernameInput"></input>
 	</view>
-    <view class="cu-form-group">
+	<view class="cu-form-group">
 		<view class="title">年龄</view>
 		<input placeholder="请输入年龄" value="{{age}}" bindinput="ageInput"></input>
 	</view>
-    <view class="cu-form-group">
+	<view class="cu-form-group">
 		<view class="title">生日</view>
 		<picker mode="date" value="{{birthday}}" start="1900-01-01" end="{{curDate}}" bindchange="bindBirthdayChange">
 			<view class="picker">
@@ -27,7 +27,7 @@
 			</view>
 		</picker>
 	</view>
-    <view class="cu-form-group">
+	<view class="cu-form-group">
 		<view class="title">学历</view>
 		<picker value="{{educationIndex}}" range="{{educationList}}" bindchange="bindEducationChange">
 			<view class="picker">
@@ -36,61 +36,61 @@
 		</picker>
 	</view>
 
-    <view class="cu-bar bg-white light solid-bottom margin-top">
-        <view class="action">
-            <text class="text-bold cuIcon-titles text-blue"></text>
-            <text class="text-bold">背景资料</text>
-        </view>
-    </view>
-    <view class="cu-form-group">
+	<view class="cu-bar bg-white light solid-bottom margin-top">
+		<view class="action">
+			<text class="text-bold cuIcon-titles text-blue"></text>
+			<text class="text-bold">背景资料</text>
+		</view>
+	</view>
+	<view class="cu-form-group">
 		<view class="title">公司</view>
 		<input placeholder="请输入公司名称" value="{{company}}" bindinput="companyInput"></input>
 	</view>
-    <view class="cu-form-group">
+	<view class="cu-form-group">
 		<view class="title">职位</view>
 		<input placeholder="请输入公司职位" value="{{title}}" bindinput="titleInput"></input>
 	</view>
-    <view class="cu-form-group">
+	<view class="cu-form-group">
 		<view class="title">学校</view>
 		<input placeholder="请输入毕业学校" value="{{school}}" bindinput="schoolInput"></input>
 	</view>
-    <view class="cu-form-group">
+	<view class="cu-form-group">
 		<view class="title">院系</view>
 		<input placeholder="请输入毕业院系" value="{{department}}" bindinput="departmentInput"></input>
 	</view>
 
-    <view class="cu-bar bg-white light solid-bottom margin-top">
-        <view class="action">
-            <text class="text-bold cuIcon-titles text-blue"></text>
-            <text class="text-bold">联系方式</text>
-        </view>
-    </view>
-    <view class="cu-form-group">
+	<view class="cu-bar bg-white light solid-bottom margin-top">
+		<view class="action">
+			<text class="text-bold cuIcon-titles text-blue"></text>
+			<text class="text-bold">联系方式</text>
+		</view>
+	</view>
+	<view class="cu-form-group">
 		<view class="title">手机</view>
-        <input placeholder="请输入手机号码" value="{{phone}}" bindinput="phoneInput"></input>
+		<input placeholder="请输入手机号码" value="{{phone}}" bindinput="phoneInput"></input>
 	</view>
-    <view class="cu-form-group">
+	<view class="cu-form-group">
 		<view class="title">邮箱</view>
-        <input placeholder="请输入电子邮箱" value="{{email}}" bindinput="emailInput"></input>
+		<input placeholder="请输入电子邮箱" value="{{email}}" bindinput="emailInput"></input>
 	</view>
-    <view class="cu-form-group">
+	<view class="cu-form-group">
 		<view class="title">地址</view>
-        <input placeholder="请输入居住地址" value="{{address}}" bindinput="addressInput"></input>
+		<input placeholder="请输入居住地址" value="{{address}}" bindinput="addressInput"></input>
 	</view>
 
-    <view class="cu-bar bg-white light solid-bottom margin-top">
-        <view class="action">
-            <text class="text-bold cuIcon-titles text-blue"></text>
-            <text class="text-bold">个人简介</text>
-        </view>
-    </view>
-    <view class="cu-form-group align-start">
-        <textarea maxlength="50" value="{{introduction}}" bindinput="introductionInput"></textarea>
-        <view class="weui-textarea-counter">{{length}}/50</view>
-    </view>
+	<view class="cu-bar bg-white light solid-bottom margin-top">
+		<view class="action">
+			<text class="text-bold cuIcon-titles text-blue"></text>
+			<text class="text-bold">个人简介</text>
+		</view>
+	</view>
+	<view class="cu-form-group align-start">
+		<textarea maxlength="50" value="{{introduction}}" bindinput="introductionInput"></textarea>
+		<view class="weui-textarea-counter">{{length}}/50</view>
+	</view>
 </form>
 
 <view class="tail flex solid-bottom padding justify-between">
-    <button class="cu-btn bg-blue light shadow" bindtap="clearInfo">清空</button>
-    <button class="cu-btn bg-blue shadow" bindtap="submitInfo">提交</button>
+	<button class="cu-btn bg-blue light shadow" bindtap="clearInfo">清空</button>
+	<button class="cu-btn bg-blue shadow" bindtap="submitInfo">提交</button>
 </view>

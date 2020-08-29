@@ -8,10 +8,10 @@ Page({
      */
     data: {
         loginStatus: true, //是否已登录，false为否，true为是
-        isEdit: false,
         userInfo: {},
         detailedInfo: {},
         openid: "",
+        isEdit: false,
         indexDataList: [{
             label: "今日访客数",
             value: "0"
@@ -69,7 +69,7 @@ Page({
         let that = this;
         const db = wx.cloud.database();
         const _ = db.command;
-        
+        // get detailedInfo
         db.collection('userinfo').where({
             openid: that.openid
         })
@@ -89,7 +89,7 @@ Page({
                 }
             }
         })
-
+        // get data
         db.collection('data')
         .get({
             success: function(res) {
@@ -101,7 +101,7 @@ Page({
         })
     },
 
-    scanQRCode(e) {
+    scanQRCode: function (e) {
         wx.scanCode({
             success (res) {
                 console.log(res)
@@ -109,8 +109,8 @@ Page({
         });
     },
 
-    shareInfo(e) {
-        this.onShareAppMessage()
+    shareInfo: function (e) {
+
     },
 
     /**

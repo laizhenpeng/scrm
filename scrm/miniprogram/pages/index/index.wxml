@@ -6,9 +6,10 @@
 <view class="padding-lr bg-white">
 	<view class="solid-bottom padding">
 		<view class="cu-avatar round lg margin-left" style="background-image:url({{userInfo.avatarUrl}})"></view>
-    <text class="text-xl margin-left-xl">{{detailedInfo.username}}</text>
-		<!-- <view wx:if="{{userInfo.gender=='1'}}" class="cu-tag badge bg-blue" >♂</view>
-      	<view wx:else class="cu-tag badge bg-pink" >♀</view> -->
+		<text wx:if="{{isEdit}}" class="text-xl margin-left-xl">{{detailedInfo.username}}</text>
+		<text wx:else class="text-xl margin-left-xl">{{userInfo.nickName}}</text>
+		<text wx:if="{{userInfo.gender=='1'}}" class="text-blue margin-left-xs">♂</text>
+		<text wx:else class="text-pink margin-left-xs" >♀</text>
 	</view>
 	<view wx:if="{{isEdit}}" class="padding-lr">
 		<view class="flex">
@@ -56,6 +57,7 @@
 			<view class="label">{{functions[1].label}}</view>
 		</navigator>
 	</view>
+	<!-- Todo: 名片模板 -->
 	<view class="cu-item">
 		<navigator url="/pages/card/card">
 			<view class="cuIcon-cu-image">
@@ -64,6 +66,7 @@
 			<view class="label">{{functions[2].label}}</view>
 		</navigator>
 	</view>
+	<!-- Todo: 扫一扫 -->
 	<view class="cu-item">
 		<view bindtap="scanQRCode">
 			<view class="cuIcon-cu-image">
@@ -72,6 +75,7 @@
 			<view class="label">{{functions[3].label}}</view>
 		</view>
 	</view>
+	<!-- Todo: 分享 -->
 	<view class="cu-item">
 		<view bindtap="shareInfo">
 			<view class="cuIcon-cu-image">

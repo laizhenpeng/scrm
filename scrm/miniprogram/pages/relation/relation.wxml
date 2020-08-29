@@ -10,10 +10,44 @@
 		</view>
 	</view>
 </scroll-view>
-<!-- Todo：列表 -->
+
 <view wx:if="{{TabCur==0}}">
-
+  <block wx:for="{{msgList}}" wx:key="index">
+	<view class="cu-list menu-avatar" bindtap="enterChat">
+		<view class="cu-item">
+      <view class="cu-avatar round lg" style="background-image:url(item.other_avatarUrl)"></view>
+      <view class="content">
+        <view class="text-gray">
+          <text class="text-cut">{{item.other_username}}</text>
+        </view>
+        <view class="text-gray text-sm flex">
+          <text class="text-cut">{{item.content}}</text>
+        </view>
+      </view>
+      <view class="action">
+        <view class="text-grey text-xs">{{item.time}}</view>
+        <view class="cu-tag round bg-red sm">{{item.unreadNum}}</view>
+      </view>
+    </view>
+	</view>
+  </block>
 </view>
-<view wx:if="{{TabCur==1}}">
 
+<view wx:if="{{TabCur==1}}">
+  <scroll-view scroll-y class="indexes" scroll-into-view="indexes-{{listCurID}}" style="height:calc(100vh - {{CustomBar}}px)" scroll-with-animation="true" enable-back-to-top="true">
+    <block wx:for="{{list}}" wx:key="index">
+    <view class="padding indexItem-{{list[index]}}" id="indexes-{{list[index]}}" data-index="{{list[index]}}">{{list[index]}}</view>
+    <navigator url="/pages/detail/detail?openid={{customer.openid}}">
+    <view class="cu-list menu-avatar no-padding">
+      <view class="cu-item" wx:for="{{1}}" wx:key="index" wx:for-index="sub">
+        <view class="cu-avatar round lg">{{list[index]}}</view>
+        <view class="content">
+          <view class="text-grey">{{list[index]}}
+            <text class="text-abc">{{list[sub]}}</text></view>
+        </view>
+      </view>
+    </view>
+    </navigator>
+  </block>
+</scroll-view>
 </view>

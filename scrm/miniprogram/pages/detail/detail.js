@@ -5,14 +5,42 @@ Page({
      * 页面的初始数据
      */
     data: {
-
+        other_openid: "",
+        userInfo: {},
+        detailedInfo: {}
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        this.setData({
+            other_openid: options.other_openid
+        })
 
+        let that = this;
+        const db = wx.cloud.database();
+        const _ = db.command;
+        db.collection('users').where({
+            openid: that.data.other_openid
+        })
+        .get({
+            success: function(res) {
+                that.setData({
+                    userInfo: res.data[0]
+                })
+            }
+        })
+        db.collection('userinfo').where({
+            openid: that.data.other_openid
+        })
+        .get({
+            success: function(res) {
+                that.setData({
+                    detailedInfo: res.data[0]
+                })
+            }
+        })
     },
 
     /**
