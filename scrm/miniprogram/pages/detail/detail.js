@@ -6,8 +6,8 @@ Page({
      */
     data: {
         other_openid: "",
-        userInfo: {},
-        detailedInfo: {}
+        other_userInfo: {},
+        other_detailedInfo: {}
     },
 
     /**
@@ -27,17 +27,18 @@ Page({
         .get({
             success: function(res) {
                 that.setData({
-                    userInfo: res.data[0]
+                    other_userInfo: res.data[0]
                 })
             }
         })
+
         db.collection('userinfo').where({
             openid: that.data.other_openid
         })
         .get({
             success: function(res) {
                 that.setData({
-                    detailedInfo: res.data[0]
+                    other_detailedInfo: res.data[0]
                 })
             }
         })

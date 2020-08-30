@@ -13,6 +13,7 @@ Page({
         scrollLeft:0,
         StatusBar: app.globalData.StatusBar,
         CustomBar: app.globalData.CustomBar,
+        letters: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"],
         msgList: [],
         csrList: []
     },
@@ -25,44 +26,74 @@ Page({
         })
     },
 
+    toChat: function (event) {
+        wx.navigateTo({
+            url: "../chat/chat?other_openid=" + this.data.msgList[event.currentTarget.id].other_openid
+        })
+    },
+
+    toDetail: function (event) {
+        wx.navigateTo({
+            url: "../detail/detail?other_openid=" + this.data.csrList[event.currentTarget.id].other_openid
+        })
+    },
+
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        let list = [];
-        for (let i = 0; i < 26; i++) {
-            list[i] = String.fromCharCode(65 + i)
-        }
-        this.setData({
-            list: list
-        })
 
         let that = this;
         const db = wx.cloud.database();
         const _ = db.command;
         const $ = _.aggregate;
-
-        db.collection('records').where({
-            openid: that.data.openid,
+        db.collection("records").aggregate()
+        .match({
+            openid: "ox8OR4iMybOXuDKss4VpXWdHr_r8",
             type: "msg"
         })
-        .orderBy('time','desc')
+        .group({
+            _id: "$other_openid",
+            num: $.sum(1)
+        })
+        .end({
+            success: function(res) {
+                let temp = []
+                let length = res.list.length
+                for (let i = 0; i < length; i++) {
+                    db.collection("records").where({
+                        openid: "ox8OR4iMybOXuDKss4VpXWdHr_r8",
+                        type: "msg",
+                        other_openid: res.list[i]._id
+                    })
+                    .orderBy("time", "desc")
+                    .limit(1)
+                    .get({
+                        success: function(res) {
+                            // let result = res.data[0]
+                            // result.time = result.time.getFullYear().toString() + "年" + (result.time.getMonth()+1).toString() + "月" + result.time.getDate().toString() + "日 " + result.time.getHours().toString() + ":" + result.time.getMinutes().toString() + ":" + result.time.getSeconds().toString()
+                            temp.push(res.data[0])
+                            if (i == length - 1) {
+                                that.setData({
+                                    msgList: temp
+                                })
+                            }
+                        }
+                    })
+                }
+            }
+        })
+        db.collection("records").where({
+            openid: "ox8OR4iMybOXuDKss4VpXWdHr_r8",
+            type: "csr"
+        })
         .get({
             success: function(res) {
-                // for (let i = 0; i < res.data.length; i++) {
-                //     let message = {}
-                //     message['other_avatarUrl'] = res.data[i].other_avatarUrl
-                //     message['other_username'] = res.data[i].other_avatarUrl
-                //     message['content'] = res.data[i].content
-                //     message['time'] = res.data[i].time
-                // }
                 that.setData({
-                    msgList: res.data
+                    csrList: res.data
                 })
             }
         })
-
-
     },
 
     /**

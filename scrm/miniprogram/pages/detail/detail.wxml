@@ -6,14 +6,14 @@
 
 <view class="padding-lr bg-white cu-list menu sm-border card-menu margin-top">
 	<view class="solid-bottom padding">
-		<view class="cu-avatar round lg margin-left" style="background-image:url({{userInfo.avatarUrl}})"></view>
-		<text class="text-xl margin-left-xl">{{detailedInfo.username}}</text>
-		<text wx:if="{{userInfo.gender=='1'}}" class="text-blue margin-left-xs">♂</text>
+		<view class="cu-avatar round lg margin-left" style="background-image:url({{other_userInfo.avatarUrl}})"></view>
+		<text class="text-xl margin-left-xl">{{other_detailedInfo.username}}</text>
+		<text wx:if="{{other_userInfo.gender=='1'}}" class="text-blue margin-left-xs">♂</text>
 		<text wx:else class="text-pink margin-left-xs">♀</text>
 	</view>
 	<view class="padding-lr">
 		<view class="flex">
-			<view class="flex-sub padding-xs radius text-xl">个人简介:  {{detailedInfo.introduction}}</view>
+			<view class="flex-sub padding-xs radius text-xl">个人简介:  {{other_detailedInfo.introduction}}</view>
 		</view>
 	</view>
 </view>
@@ -22,25 +22,25 @@
 	<view class="cu-item">
 		<view class="content">
 			<text class="cuIcon-favor text-grey"></text>
-			<text class="text-xl">年龄: {{detailedInfo.age}}</text>
+			<text class="text-xl">年龄: {{other_detailedInfo.age}}</text>
 		</view>
 	</view>
 	<view class="cu-item">
 		<view class="content">
 			<text class="cuIcon-favor text-grey"></text>
-			<text class="text-xl">生日: {{detailedInfo.birthday}}</text>
+			<text class="text-xl">生日: {{other_detailedInfo.birthday}}</text>
 		</view>
 	</view>
 	<view class="cu-item">
 		<view class="content">
 			<text class="cuIcon-favor text-grey"></text>
-			<text class="text-xl">家乡: {{userInfo.city}},  {{userInfo.province}}, {{userInfo.country}}</text>
+			<text class="text-xl">家乡: {{other_userInfo.city}},  {{other_userInfo.province}}, {{other_userInfo.country}}</text>
 		</view>
 	</view>
 	<view class="cu-item">
 		<view class="content">
 			<text class="cuIcon-favor text-grey"></text>
-			<text class="text-xl">学历: {{detailedInfo.education}}</text>
+			<text class="text-xl">学历: {{other_detailedInfo.education}}</text>
 		</view>
 	</view>
 </view>
@@ -49,25 +49,25 @@
 	<view class="cu-item">
 		<view class="content">
 			<text class="cuIcon-favor text-grey"></text>
-			<text class="text-xl">公司: {{detailedInfo.company}}</text>
+			<text class="text-xl">公司: {{other_detailedInfo.company}}</text>
 		</view>
 	</view>
 	<view class="cu-item">
 		<view class="content">
 			<text class="cuIcon-favor text-grey"></text>
-			<text class="text-xl">职位: {{detailedInfo.title}}</text>
+			<text class="text-xl">职位: {{other_detailedInfo.title}}</text>
 		</view>
 	</view>
 	<view class="cu-item">
 		<view class="content">
 			<text class="cuIcon-favor text-grey"></text>
-			<text class="text-xl">学校: {{detailedInfo.school}}</text>
+			<text class="text-xl">学校: {{other_detailedInfo.school}}</text>
 		</view>
 	</view>
 	<view class="cu-item">
 		<view class="content">
 			<text class="cuIcon-favor text-grey"></text>
-			<text class="text-xl">院系: {{detailedInfo.department}}</text>
+			<text class="text-xl">院系: {{other_detailedInfo.department}}</text>
 		</view>
 	</view>
 </view>
@@ -76,19 +76,19 @@
 	<view class="cu-item">
 		<view class="content">
 			<text class="cuIcon-favor text-grey"></text>
-			<text class="text-xl">手机: {{detailedInfo.phone}}</text>
+			<text class="text-xl">手机: {{other_detailedInfo.phone}}</text>
 		</view>
 	</view>
 	<view class="cu-item">
 		<view class="content">
 			<text class="cuIcon-favor text-grey"></text>
-			<text class="text-xl">邮箱: {{detailedInfo.email}}</text>
+			<text class="text-xl">邮箱: {{other_detailedInfo.email}}</text>
 		</view>
 	</view>
 	<view class="cu-item">
 		<view class="content">
 			<text class="cuIcon-favor text-grey"></text>
-			<text class="text-xl">地址: {{detailedInfo.address}}</text>
+			<text class="text-xl">地址: {{other_detailedInfo.address}}</text>
 		</view>
 	</view>
 </view>

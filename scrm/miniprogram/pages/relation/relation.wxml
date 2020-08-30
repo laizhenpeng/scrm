@@ -12,42 +12,43 @@
 </scroll-view>
 
 <view wx:if="{{TabCur==0}}">
-  <block wx:for="{{msgList}}" wx:key="index">
-	<view class="cu-list menu-avatar" bindtap="enterChat">
-		<view class="cu-item">
-      <view class="cu-avatar round lg" style="background-image:url(item.other_avatarUrl)"></view>
+	<view wx:if="{{msgList}}" class="cu-list menu-avatar">
+		<view class="cu-item" wx:for="{{msgList}}" wx:key="index" bindtap="toChat" id="{{index}}">
+      <view class="cu-avatar round lg" style="background-image:url({{item.other_avatarUrl}})"></view>
       <view class="content">
-        <view class="text-gray">
+        <view class="text-black">
           <text class="text-cut">{{item.other_username}}</text>
         </view>
         <view class="text-gray text-sm flex">
           <text class="text-cut">{{item.content}}</text>
         </view>
       </view>
-      <view class="action">
-        <view class="text-grey text-xs">{{item.time}}</view>
-        <view class="cu-tag round bg-red sm">{{item.unreadNum}}</view>
+      <view class="action text-xxl">
+        <!-- <view class="text-grey text-xs">{{item.time}}</view> -->
+        <view class="cuIcon-message text-green"></view>
       </view>
     </view>
 	</view>
-  </block>
+  <view wx:else class="padding text-center">
+    无消息
+  </view>
 </view>
 
 <view wx:if="{{TabCur==1}}">
   <scroll-view scroll-y class="indexes" scroll-into-view="indexes-{{listCurID}}" style="height:calc(100vh - {{CustomBar}}px)" scroll-with-animation="true" enable-back-to-top="true">
-    <block wx:for="{{list}}" wx:key="index">
-    <view class="padding indexItem-{{list[index]}}" id="indexes-{{list[index]}}" data-index="{{list[index]}}">{{list[index]}}</view>
-    <navigator url="/pages/detail/detail?openid={{customer.openid}}">
+    <block wx:for="{{letters}}" wx:key="index">
+    <!-- 判断首字母 -->
+    <view class="padding indexItem-{{letters[index]}}" id="indexes-{{letters[index]}}" data-index="{{letters[index]}}">{{letters[index]}}</view>
     <view class="cu-list menu-avatar no-padding">
-      <view class="cu-item" wx:for="{{1}}" wx:key="index" wx:for-index="sub">
-        <view class="cu-avatar round lg">{{list[index]}}</view>
+      <view class="cu-item" wx:for="{{csrList}}" wx:key="index" bindtap="toDetail" id="{{index}}">
+        <view class="cu-avatar round lg" style="background-image:url({{item.other_avatarUrl}})"></view>
         <view class="content">
-          <view class="text-grey">{{list[index]}}
-            <text class="text-abc">{{list[sub]}}</text></view>
-        </view>
+          <view class="text-black">
+            <text class="text-cut">{{item.other_username}}</text>
+          </view>
+      </view>
       </view>
     </view>
-    </navigator>
   </block>
 </scroll-view>
 </view>

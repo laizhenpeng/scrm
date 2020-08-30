@@ -70,7 +70,7 @@ Page({
         const db = wx.cloud.database();
         const _ = db.command;
         // get detailedInfo
-        db.collection('userinfo').where({
+        db.collection("userinfo").where({
             openid: that.openid
         })
         .get({
@@ -90,7 +90,7 @@ Page({
             }
         })
         // get data
-        db.collection('data')
+        db.collection("data")
         .get({
             success: function(res) {
                 that.setData({
