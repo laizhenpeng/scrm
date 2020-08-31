@@ -5,9 +5,9 @@ Page({
      * 页面的初始数据
      */
     data: {
-        other_openid: "",
         other_userInfo: {},
-        other_detailedInfo: {}
+        other_detailedInfo: {},
+        other_openid: ""
     },
 
     /**
@@ -20,28 +20,26 @@ Page({
 
         let that = this;
         const db = wx.cloud.database();
-        const _ = db.command;
         db.collection('users').where({
             openid: that.data.other_openid
         })
-        .get({
-            success: function(res) {
-                that.setData({
-                    other_userInfo: res.data[0]
-                })
-            }
-        })
-
+            .get({
+                success: function (res) {
+                    that.setData({
+                        other_userInfo: res.data[0]
+                    })
+                }
+            })
         db.collection('userinfo').where({
             openid: that.data.other_openid
         })
-        .get({
-            success: function(res) {
-                that.setData({
-                    other_detailedInfo: res.data[0]
-                })
-            }
-        })
+            .get({
+                success: function (res) {
+                    that.setData({
+                        other_detailedInfo: res.data[0]
+                    })
+                }
+            })
     },
 
     /**

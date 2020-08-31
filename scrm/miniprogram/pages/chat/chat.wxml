@@ -5,34 +5,35 @@
 </cu-custom>
 
 <view class="cu-chat">
-  <view wx:for="{{messages}}" wx:key="index">
-    <view wx:if="{{item.direction == 'to'}}" class="cu-item self">
-      <view class="main">
-        <view class="content bg-green shadow">
-          <text>{{item.content}}</text>
-        </view>
-      </view>
-      <view class="cu-avatar radius" style="background-image:url({{item.avatarUrl}})"></view>
-      <view class="date">{{item.time}}</view>
-    </view>
-    <view wx:else class="cu-item">
-      <view class="cu-avatar radius" style="background-image:url({{item.other_avatarUrl}})"></view>
-      <view class="main">
-        <view class="content shadow">
-          <text>{{item.content}}</text>
-        </view>
-      </view>
-      <view class="date">{{item.time}}</view>
-    </view>
-  </view>
+	<view wx:for="{{messages}}" wx:key="index">
+		<view wx:if="{{item.direction == 'to'}}" class="cu-item self">
+			<view class="main">
+				<view class="content bg-green shadow">
+					<text>{{item.content}}</text>
+				</view>
+			</view>
+			<view class="cu-avatar radius" style="background-image:url({{item.avatarUrl}})"></view>
+			<view class="date">{{item.time}}</view>
+		</view>
+		<view wx:else class="cu-item">
+			<view class="cu-avatar radius" style="background-image:url({{item.other_avatarUrl}})"></view>
+			<view class="main">
+				<view class="content shadow">
+					<text>{{item.content}}</text>
+				</view>
+			</view>
+			<view class="date">{{item.time}}</view>
+		</view>
+	</view>
 </view>
 <text>\n</text>
 <text>\n</text>
 <text>\n</text>
-<view class="cu-bar foot input {{InputBottom!=0?'cur':''}}" >
-  <view class="action">
-    <text class="cuIcon-right text-grey"></text>
-  </view>
-  <input class="solid-bottom" value="{{msg}}" bindfocus="InputFocus" bindblur="InputBlur" adjust-position="{{false}}" focus="{{false}}" maxlength="300" bindinput="messageInput" cursor-spacing="10"></input>
-  <button class="cu-btn bg-green shadow" bindtap="sendMsg">发送</button>
+<!-- 调整 -->
+<view class="cu-bar foot input {{InputBottom!=0?'cur':''}}">
+	<view class="action">
+		<text class="cuIcon-right text-grey"></text>
+	</view>
+	<input class="solid-bottom" value="{{msg}}" bindfocus="InputFocus" bindblur="InputBlur" adjust-position="{{false}}" focus="{{false}}" maxlength="300" bindinput="messageInput" cursor-spacing="10"></input>
+	<button class="cu-btn bg-green shadow" bindtap="sendMsg">发送</button>
 </view>

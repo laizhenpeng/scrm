@@ -59,8 +59,8 @@ App({
   },
 
   globalData: {
-    openid: "",
     userInfo: {},
-    detailedInfo: {}
+    detailedInfo: {},
+    openid: ""
   }
 })

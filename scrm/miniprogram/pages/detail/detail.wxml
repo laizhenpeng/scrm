@@ -13,7 +13,7 @@
 	</view>
 	<view class="padding-lr">
 		<view class="flex">
-			<view class="flex-sub padding-xs radius text-xl">个人简介:  {{other_detailedInfo.introduction}}</view>
+			<view class="flex-sub padding-xs radius text-xl">个人简介: {{other_detailedInfo.introduction}}</view>
 		</view>
 	</view>
 </view>

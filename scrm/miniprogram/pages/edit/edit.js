@@ -25,22 +25,13 @@ Page({
         length: 0
     },
 
-    /**
-     * 生命周期函数--监听页面加载
-     */
-    onLoad: function (options) {
-        this.setData({
-            openid: app.globalData.openid,
-            curDate: (new Date(new Date().getTime()).getFullYear().toString() + '-' + (new Date(new Date().getTime()).getMonth() + 1).toString() + '-' + new Date(new Date().getTime()).getDate().toString()).split(' ')[0]
-        })
-    },
-
     // bindChange
     bindBirthdayChange: function (e) {
         this.setData({
             birthday: e.detail.value
         })
     },
+
     bindEducationChange: function (e) {
         this.setData({
             educationIndex: e.detail.value
@@ -53,46 +44,55 @@ Page({
             username: e.detail.value
         })
     },
+
     ageInput: function (e) {
         this.setData({
             age: e.detail.value
         })
     },
+
     companyInput: function (e) {
         this.setData({
             company: e.detail.value
         })
     },
+
     titleInput: function (e) {
         this.setData({
             title: e.detail.value
         })
     },
+
     schoolInput: function (e) {
         this.setData({
             school: e.detail.value
         })
     },
+
     departmentInput: function (e) {
         this.setData({
             department: e.detail.value
         })
     },
+
     phoneInput: function (e) {
         this.setData({
             phone: e.detail.value
         })
     },
+
     emailInput: function (e) {
         this.setData({
             email: e.detail.value
         })
     },
+
     addressInput: function (e) {
         this.setData({
             address: e.detail.value
         })
     },
+
     introductionInput: function (e) {
         this.setData({
             introduction: e.detail.value,
@@ -119,45 +119,43 @@ Page({
     },
 
     submitInfo: function () {
-        let that = this
-        if (isNaN(that.data.age)) {
+        if (isNaN(this.data.age)) {
             wx.showModal({
                 title: "信息提示",
                 content: "请正确填写年龄！"
             })
         }
-        if (isNaN(that.data.phone)) {
+        if (isNaN(this.data.phone)) {
             wx.showModal({
                 title: "信息提示",
                 content: "请正确填写手机号码！"
             })
-        } else if (that.data.username == null || that.data.age == null || that.data.birthday == null || that.data.educationIndex == null) {
+        } else if (this.data.username == null || this.data.age == null || this.data.birthday == null || this.data.educationIndex == null) {
             wx.showModal({
                 title: "信息提示",
                 content: "请完整填写基本信息！"
             })
-        } else if (that.data.company == null || that.data.title == null || that.data.school == null || that.data.department == null) {
+        } else if (this.data.company == null || this.data.title == null || this.data.school == null || this.data.department == null) {
             wx.showModal({
                 title: "信息提示",
                 content: "请完整填写背景资料！"
             })
-        } else if (that.data.phone == null || that.data.email == null || that.data.address == null) {
+        } else if (this.data.phone == null || this.data.email == null || this.data.address == null) {
             wx.showModal({
                 title: "信息提示",
                 content: "请完整填写联系方式！"
             })
-        } else if (that.data.length == 0) {
+        } else if (this.data.length == 0) {
             wx.showModal({
                 title: "信息提示",
                 content: "请输入个人简介！"
             })
         } else {
+            let that = this;
             const db = wx.cloud.database();
-            const _ = db.command;
-            // 写入用户信息
             db.collection('userinfo').where({
-                    openid: that.data.openid
-                })
+                openid: that.data.openid
+            })
                 .get({
                     success: function (res) {
                         if (res.data.length == 0) {
@@ -210,6 +208,17 @@ Page({
                 })
         }
     },
+
+    /**
+     * 生命周期函数--监听页面加载
+     */
+    onLoad: function (options) {
+        this.setData({
+            openid: app.globalData.openid,
+            curDate: (new Date(new Date().getTime()).getFullYear().toString() + '-' + (new Date(new Date().getTime()).getMonth() + 1).toString() + '-' + new Date(new Date().getTime()).getDate().toString()).split(' ')[0]
+        })
+    },
+
     /**
      * 生命周期函数--监听页面初次渲染完成
      */

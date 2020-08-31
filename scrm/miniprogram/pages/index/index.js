@@ -7,10 +7,10 @@ Page({
      * 页面的初始数据
      */
     data: {
-        loginStatus: true, //是否已登录，false为否，true为是
         userInfo: {},
         detailedInfo: {},
         openid: "",
+        isLogin: false, // 测试未授权状态
         isEdit: false,
         indexDataList: [{
             label: "今日访客数",
@@ -37,6 +37,50 @@ Page({
         }]
     },
 
+    getUserInfo: function (e) {
+        app.globalData.userInfo = e.detail.userInfo
+        this.setData({
+            userInfo: e.detail.userInfo,
+            isLogin: true
+        })
+        //add users
+
+    },
+
+    toView: function (event) {
+        if (this.data.isLogin && this.data.isEdit) {
+            wx.navigateTo({
+                url: "../view/view"
+            })
+        }
+    },
+
+    toEdit: function (event) {
+        wx.navigateTo({
+            url: "../edit/edit"
+        })
+    },
+
+    toCard: function (event) {
+        if (this.data.isLogin && this.data.isEdit) {
+            wx.navigateTo({
+                url: "../card/card"
+            })
+        }
+    },
+
+    scanQRCode: function (e) {
+        wx.scanCode({
+            success(res) {
+                console.log(res)
+            }
+        });
+    },
+
+    shareInfo: function (e) {
+
+    },
+
     /**
      * 生命周期函数--监听页面加载
      */
@@ -44,13 +88,15 @@ Page({
         if (!("avatarUrl" in app.globalData.userInfo)) {
             app.userInfoCallbacks = res => {
                 this.setData({
-                    userInfo: res.userInfo
+                    userInfo: res.userInfo,
+                    isLogin: true
                 })
             }
         }
         else {
             this.setData({
-                userInfo: app.globalData.userInfo
+                userInfo: app.globalData.userInfo,
+                isLogin: true
             })
         }
         if (!app.globalData.openid) {
@@ -65,52 +111,44 @@ Page({
                 openid: app.globalData.openid
             })
         }
-        
+
         let that = this;
         const db = wx.cloud.database();
-        const _ = db.command;
-        // get detailedInfo
+
+        //add users
+
+        //get userinfo
         db.collection("userinfo").where({
             openid: that.openid
         })
-        .get({
-            success: function(res) {
-                if (res.data.length != 0) {
-                    app.globalData.detailedInfo = res.data[0]
+            .get({
+                success: function (res) {
+                    if (res.data.length != 0) {
+                        app.globalData.detailedInfo = res.data[0]
+                        that.setData({
+                            isEdit: true,
+                            detailedInfo: res.data[0]
+                        })
+                    }
+                    else {
+                        that.setData({
+                            isEdit: false
+                        })
+                    }
+                }
+            })
+
+        db.collection("data").where({
+            openid: that.data.openid
+        })
+            .get({
+                success: function (res) {
                     that.setData({
-                        isEdit: true,
-                        detailedInfo: res.data[0]
+                        "indexDataList[0].value": res.data[0].vis_daily,
+                        "indexDataList[1].value": res.data[0].csr_daily
                     })
                 }
-                else {
-                    that.setData({
-                        isEdit: false
-                    })
-                }
-            }
-        })
-        // get data
-        db.collection("data")
-        .get({
-            success: function(res) {
-                that.setData({
-                    "indexDataList[0].value": res.data[0].vis_daily,
-                    "indexDataList[1].value": res.data[0].csr_daily
-                })
-            }
-        })
-    },
-
-    scanQRCode: function (e) {
-        wx.scanCode({
-            success (res) {
-                console.log(res)
-            }
-        });
-    },
-
-    shareInfo: function (e) {
-
+            })
     },
 
     /**
@@ -159,6 +197,11 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function () {
-
+        return {
+            title: 'ECharts 可以在微信小程序中使用啦！',
+            path: '/pages/index/index',
+            success: function () { },
+            fail: function () { }
+        }
     }
 })
