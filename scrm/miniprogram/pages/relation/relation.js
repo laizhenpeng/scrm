@@ -11,16 +11,12 @@ Page({
         tabList: ["消息", "客户"],
         TabCur: 0,
         scrollLeft: 0,
-        StatusBar: app.globalData.StatusBar,
-        CustomBar: app.globalData.CustomBar,
-        letters: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"],
         msgList: [],
         csrList: []
     },
 
     tabSelect(e) {
         this.setData({
-            openid: app.globalData.openid,
             TabCur: e.currentTarget.dataset.id,
             scrollLeft: (e.currentTarget.dataset.id - 1) * 60
         })
@@ -42,14 +38,17 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        this.setData({
+            openid: app.globalData.openid
+        })
+
         let that = this;
         const db = wx.cloud.database();
-        const _ = db.command
+        const _ = db.command;
         const $ = _.aggregate;
-        // openid: that.data.openid
         db.collection("records").aggregate()
             .match({
-                openid: "ox8OR4iMybOXuDKss4VpXWdHr_r8",
+                openid: app.globalData.openid,
                 type: "msg"
             })
             .group({
@@ -62,7 +61,7 @@ Page({
                     let length = res.list.length
                     for (let i = 0; i < length; i++) {
                         db.collection("records").where({
-                            openid: "ox8OR4iMybOXuDKss4VpXWdHr_r8",
+                            openid: app.globalData.openid,
                             type: "msg",
                             other_openid: res.list[i]._id
                         })
@@ -70,8 +69,6 @@ Page({
                             .limit(1)
                             .get({
                                 success: function (res) {
-                                    // let result = res.data[0]
-                                    // result.time = result.time.getFullYear().toString() + "年" + (result.time.getMonth()+1).toString() + "月" + result.time.getDate().toString() + "日 " + result.time.getHours().toString() + ":" + result.time.getMinutes().toString() + ":" + result.time.getSeconds().toString()
                                     temp.push(res.data[0])
                                     if (i == length - 1) {
                                         that.setData({
@@ -84,9 +81,10 @@ Page({
                 }
             })
         db.collection("records").where({
-            openid: "ox8OR4iMybOXuDKss4VpXWdHr_r8",
+            openid: app.globalData.openid,
             type: "csr"
         })
+            .orderBy("other_username", "desc")
             .get({
                 success: function (res) {
                     that.setData({

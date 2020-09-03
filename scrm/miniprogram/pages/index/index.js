@@ -10,7 +10,7 @@ Page({
         userInfo: {},
         detailedInfo: {},
         openid: "",
-        isLogin: false, // 测试未授权状态
+        isLogin: false,
         isEdit: false,
         indexDataList: [{
             label: "今日访客数",
@@ -41,13 +41,31 @@ Page({
         app.globalData.userInfo = e.detail.userInfo
         this.setData({
             userInfo: e.detail.userInfo,
-            isLogin: true
         })
-        //add users
 
+        let that = this;
+        const db = wx.cloud.database();
+        db.collection('userinfo').add({
+            data: {
+                _openid: that.data.openid,
+                openid: that.data.openid,
+                avatarUrl: e.detail.userInfo.avatarUrl,
+                city: e.detail.userInfo.city,
+                country: e.detail.userInfo.country,
+                gender: e.detail.userInfo.gender,
+                language: e.detail.userInfo.language,
+                nickName: e.detail.userInfo.nickName,
+                province: e.detail.userInfo.province,
+            },
+            success: function (res) {
+                that.setData({
+                    isLogin: true
+                })
+            }
+        })
     },
 
-    toView: function (event) {
+    toView: function (e) {
         if (this.data.isLogin && this.data.isEdit) {
             wx.navigateTo({
                 url: "../view/view"
@@ -55,21 +73,21 @@ Page({
         }
     },
 
-    toEdit: function (event) {
+    toEdit: function (e) {
         wx.navigateTo({
             url: "../edit/edit"
         })
     },
 
-    toCard: function (event) {
-        if (this.data.isLogin && this.data.isEdit) {
-            wx.navigateTo({
-                url: "../card/card"
-            })
-        }
+    toCard: function (e) {
+        wx.showToast({
+            title: "敬请期待",
+            icon: 'success',
+            duration: 2000
+        })
     },
 
-    scanQRCode: function (e) {
+    scanCode: function (e) {
         wx.scanCode({
             success(res) {
                 console.log(res)
@@ -88,15 +106,13 @@ Page({
         if (!("avatarUrl" in app.globalData.userInfo)) {
             app.userInfoCallbacks = res => {
                 this.setData({
-                    userInfo: res.userInfo,
-                    isLogin: true
+                    userInfo: res.userInfo
                 })
             }
         }
         else {
             this.setData({
-                userInfo: app.globalData.userInfo,
-                isLogin: true
+                userInfo: app.globalData.userInfo
             })
         }
         if (!app.globalData.openid) {
@@ -115,9 +131,24 @@ Page({
         let that = this;
         const db = wx.cloud.database();
 
-        //add users
+        db.collection("users").where({
+            openid: that.openid
+        })
+            .get({
+                success: function (res) {
+                    if (res.data.length != 0) {
+                        that.setData({
+                            isLogin: true
+                        })
+                    }
+                    else {
+                        that.setData({
+                            isLogin: false
+                        })
+                    }
+                }
+            })
 
-        //get userinfo
         db.collection("userinfo").where({
             openid: that.openid
         })
@@ -139,7 +170,7 @@ Page({
             })
 
         db.collection("data").where({
-            openid: that.data.openid
+            openid: that.openid
         })
             .get({
                 success: function (res) {
@@ -197,11 +228,6 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function () {
-        return {
-            title: 'ECharts 可以在微信小程序中使用啦！',
-            path: '/pages/index/index',
-            success: function () { },
-            fail: function () { }
-        }
+
     }
 })

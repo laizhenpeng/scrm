@@ -94,3 +94,21 @@
 	<button class="cu-btn bg-blue light shadow" bindtap="clearInfo">清空</button>
 	<button class="cu-btn bg-blue shadow" bindtap="submitInfo">提交</button>
 </view>
+
+<view class="cu-modal {{modalName=='succModal'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">信息提示</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl text-center text-xl text-bold">
+      编辑个人信息成功
+    </view>
+    <view class="cu-bar bg-white">
+      <view class="action margin-0 flex-sub text-green solid-left" bindtap="toIndex">返回首页</view>
+      <view class="action margin-0 flex-sub text-green solid-left" bindtap="toView">查看信息</view>
+    </view>
+  </view>
+</view>

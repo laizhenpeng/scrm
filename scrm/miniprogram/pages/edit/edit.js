@@ -21,8 +21,9 @@ Page({
         phone: null,
         email: null,
         address: null,
-        introduction: "",
-        length: 0
+        introduction: null,
+        length: 0,
+        modalName: null
     },
 
     // bindChange
@@ -113,7 +114,7 @@ Page({
             phone: null,
             email: null,
             address: null,
-            introduction: "",
+            introduction: null,
             length: 0
         })
     },
@@ -125,32 +126,37 @@ Page({
                 content: "请正确填写年龄！"
             })
         }
-        if (isNaN(this.data.phone)) {
+        else if (isNaN(this.data.phone)) {
             wx.showModal({
                 title: "信息提示",
                 content: "请正确填写手机号码！"
             })
-        } else if (this.data.username == null || this.data.age == null || this.data.birthday == null || this.data.educationIndex == null) {
+        }
+        else if (this.data.username == null || this.data.age == null || this.data.birthday == null || this.data.educationIndex == null) {
             wx.showModal({
                 title: "信息提示",
                 content: "请完整填写基本信息！"
             })
-        } else if (this.data.company == null || this.data.title == null || this.data.school == null || this.data.department == null) {
+        }
+        else if (this.data.company == null || this.data.title == null || this.data.school == null || this.data.department == null) {
             wx.showModal({
                 title: "信息提示",
                 content: "请完整填写背景资料！"
             })
-        } else if (this.data.phone == null || this.data.email == null || this.data.address == null) {
+        }
+        else if (this.data.phone == null || this.data.email == null || this.data.address == null) {
             wx.showModal({
                 title: "信息提示",
                 content: "请完整填写联系方式！"
             })
-        } else if (this.data.length == 0) {
+        }
+        else if (this.data.introduction == null || this.data.length == 0) {
             wx.showModal({
                 title: "信息提示",
                 content: "请输入个人简介！"
             })
-        } else {
+        }
+        else {
             let that = this;
             const db = wx.cloud.database();
             db.collection('userinfo').where({
@@ -176,11 +182,13 @@ Page({
                                     introduction: that.data.introduction
                                 },
                                 success: function (res) {
-                                    // 返回选项
-                                    console.log(res)
+                                    that.setData({
+                                        modalName: "succModal",
+                                    })
                                 }
                             })
-                        } else {
+                        }
+                        else {
                             let id = res.data[0]._id
                             db.collection('userinfo').doc(id).set({
                                 data: {
@@ -199,14 +207,33 @@ Page({
                                     introduction: that.data.introduction
                                 },
                                 success: function (res) {
-                                    // 返回选项
-                                    console.log(res)
+                                    that.setData({
+                                        modalName: "succModal",
+                                    })
                                 }
                             })
                         }
                     }
                 })
         }
+    },
+
+    hideModal: function () {
+        this.setData({
+            modalName: null
+        })
+    },
+
+    toIndex: function () {
+        wx.navigateBack({
+            delta: 1
+        })
+    },
+
+    toView: function () {
+        wx.redirectTo({
+            url: "/pages/view/view"
+        })
     },
 
     /**

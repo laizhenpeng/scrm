@@ -63,16 +63,16 @@
 		</view>
 		<view class="label">{{functions[2].label}}</view>
 	</view>
-	<!-- Todo: 扫一扫 -->
+
 	<view class="cu-item">
-		<view bindtap="scanQRCode">
+		<view bindtap="scanCode">
 			<view class="cuIcon-cu-image">
 				<image class="icon" src="{{functions[3].icon}}"></image>
 			</view>
 			<view class="label">{{functions[3].label}}</view>
 		</view>
 	</view>
-	<!-- Todo: 分享 -->
+
 	<view class="cu-item">
 		<view bindtap="shareInfo">
 			<view class="cuIcon-cu-image">

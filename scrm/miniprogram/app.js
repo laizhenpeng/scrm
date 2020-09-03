@@ -46,7 +46,6 @@ App({
       name: 'login',
       data: {},
       success: res => {
-        // console.log('[云函数] [login] user openid: ', res.result.openid)
         this.globalData.openid = res.result.openid
         if (this.openidCallbacks) {
           this.openidCallbacks(res)
