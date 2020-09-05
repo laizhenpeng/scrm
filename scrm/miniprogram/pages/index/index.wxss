@@ -1,1 +1,10 @@
 /* miniprogram/pages/index/index.wxss */
+.shareBtn {
+  display: inline-block;
+  position: absolute;
+  opacity: 0;
+  height: 100%;
+  top: 0;
+  padding: 0;
+  margin: 0;
+}

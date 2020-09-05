@@ -62,12 +62,12 @@
 		</view>
 	</view>
 	<view class="cu-item">
-		<view bindtap="shareInfo">
+		<view>
 			<view class="cuIcon-cu-image">
 				<image class="icon" src="{{functions[3].icon}}"></image>
 			</view>
 			<view class="label">{{functions[3].label}}</view>
 		</view>
+		<button class="shareBtn" open-type="share"></button>
 	</view>
-	<!-- <button class="shareBtn" open-type="share">分享</button> -->
 </view>
