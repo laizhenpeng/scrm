@@ -101,7 +101,7 @@ Page({
         })
     },
 
-    clearInfo: function () {
+    clearBtn: function () {
         this.setData({
             username: null,
             age: null,
@@ -119,7 +119,7 @@ Page({
         })
     },
 
-    submitInfo: function () {
+    submitBtn: function () {
         if (isNaN(this.data.age)) {
             wx.showModal({
                 title: "信息提示",

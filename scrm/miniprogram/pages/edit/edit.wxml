@@ -91,8 +91,8 @@
 </form>
 
 <view class="tail flex solid-bottom padding justify-between">
-	<button class="cu-btn bg-blue light shadow" bindtap="clearInfo">清空</button>
-	<button class="cu-btn bg-blue shadow" bindtap="submitInfo">提交</button>
+	<button class="cu-btn bg-blue light shadow" bindtap="clearBtn">清空</button>
+	<button class="cu-btn bg-blue shadow" bindtap="submitBtn">提交</button>
 </view>
 
 <view class="cu-modal {{modalName=='succModal'?'show':''}}">

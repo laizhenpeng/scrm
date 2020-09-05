@@ -25,7 +25,7 @@ Page({
         })
     },
 
-    sendMsg: function () {
+    sendBtn: function () {
         let time = new Date()
         if (this.data.length == 0) {
             wx.showModal({

@@ -2,25 +2,23 @@
 import * as echarts from '../../components/ec-canvas/echarts';
 const app = getApp()
 
-function initChart(canvas, width, height, dpr) {
+function initMsgChart(canvas, width, height, dpr) {
     const chart = echarts.init(canvas, null, {
         width: width,
         height: height,
-        devicePixelRatio: dpr // new
+        devicePixelRatio: dpr
     });
     canvas.setChart(chart);
-
     var option = {
         title: {
-            text: '测试下面legend的红色区域不应被裁剪',
+            text: '本周消息数',
             left: 'center'
         },
         color: ["#37A2DA", "#67E0E3", "#9FE6B8"],
         legend: {
-            data: ['A', 'B', 'C'],
-            top: 50,
+            data: ['总数', '接受', '发送'],
+            top: 25,
             left: 'center',
-            backgroundColor: 'red',
             z: 100
         },
         grid: {
@@ -34,7 +32,6 @@ function initChart(canvas, width, height, dpr) {
             type: 'category',
             boundaryGap: false,
             data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
-            // show: false
         },
         yAxis: {
             x: 'center',
@@ -44,26 +41,108 @@ function initChart(canvas, width, height, dpr) {
                     type: 'dashed'
                 }
             }
-            // show: false
         },
         series: [{
-            name: 'A',
+            name: '总数',
             type: 'line',
-            smooth: true,
-            data: [18, 36, 65, 30, 78, 40, 33]
+            data: [40, 25, 30, 45, 35, 50, 65]
         }, {
-            name: 'B',
+            name: '接受',
             type: 'line',
-            smooth: true,
-            data: [12, 50, 51, 35, 70, 30, 20]
+            data: [25, 15, 15, 20, 15, 25, 35]
         }, {
-            name: 'C',
+            name: '发送',
             type: 'line',
-            smooth: true,
-            data: [10, 30, 31, 50, 40, 20, 10]
+            data: [15, 10, 15, 25, 20, 25, 30]
         }]
     };
 
+    chart.setOption(option);
+    return chart;
+}
+
+function initVisChart(canvas, width, height, dpr) {
+    const chart = echarts.init(canvas, null, {
+        width: width,
+        height: height,
+        devicePixelRatio: dpr
+    });
+    canvas.setChart(chart);
+    var option = {
+        title: {
+            text: '本周访客数',
+            left: 'center'
+        },
+        color: "#0E9ED9",
+        grid: {
+            containLabel: true
+        },
+        tooltip: {
+            show: true,
+            trigger: 'axis'
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+        },
+        yAxis: {
+            x: 'center',
+            type: 'value',
+            splitLine: {
+                lineStyle: {
+                    type: 'dashed'
+                }
+            }
+        },
+        series: [{
+            type: 'line',
+            data: [120, 80, 105, 125, 110, 135, 150]
+        }]
+    };
+    chart.setOption(option);
+    return chart;
+}
+
+function initCsrChart(canvas, width, height, dpr) {
+    const chart = echarts.init(canvas, null, {
+        width: width,
+        height: height,
+        devicePixelRatio: dpr
+    });
+    canvas.setChart(chart);
+    var option = {
+        title: {
+            text: '本周客户数',
+            left: 'center'
+        },
+        color: "#0E9ED9",
+        grid: {
+            containLabel: true
+        },
+        tooltip: {
+            show: true,
+            trigger: 'axis'
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+        },
+        yAxis: {
+            x: 'center',
+            type: 'value',
+            splitLine: {
+                lineStyle: {
+                    type: 'dashed'
+                }
+            }
+        },
+        series: [{
+            type: 'line',
+            data: [75, 40, 60, 80, 60, 90, 105]
+        }]
+    };
     chart.setOption(option);
     return chart;
 }
@@ -74,8 +153,14 @@ Page({
      * 页面的初始数据
      */
     data: {
-        ec: {
-            onInit: initChart
+        ec_msg: {
+            onInit: initMsgChart
+        },
+        ec_csr: {
+            onInit: initCsrChart
+        },
+        ec_vis: {
+            onInit: initVisChart
         },
         openid: "",
         tabList: ["消息", "客户"],
@@ -118,7 +203,7 @@ Page({
         }, {
             label: "本月新增",
             value: "0"
-        }],
+        }]
     },
 
     tabSelect(e) {
@@ -138,8 +223,9 @@ Page({
 
         let that = this;
         const db = wx.cloud.database();
+
         db.collection('data').where({
-            openid: that.data.openid
+            openid: app.globalData.openid
         })
             .get({
                 success: function (res) {

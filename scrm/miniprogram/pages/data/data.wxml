@@ -18,8 +18,10 @@
 			<view class="label">{{item.label}}</view>
 		</view>
 	</view>
-	<view class="chart">
-		<ec-canvas id="mychart-dom-line" canvas-id="mychart-line" ec="{{ ec }}"></ec-canvas>
+	<view class="padding bg-white">
+		<view class="chart">
+			<ec-canvas id="mychart-dom-line" canvas-id="mychart-line" ec="{{ec_msg}}"></ec-canvas>
+		</view>
 	</view>
 </view>
 
@@ -30,7 +32,14 @@
 			<view class="label">{{item.label}}</view>
 		</view>
 	</view>
-	<view class="chart">
-		<ec-canvas id="mychart-dom-line" canvas-id="mychart-line" ec="{{ ec }}"></ec-canvas>
+	<view class="padding bg-white">
+		<view class="chart">
+			<ec-canvas id="mychart-dom-line" canvas-id="mychart-line" ec="{{ec_vis}}"></ec-canvas>
+		</view>
+	</view>
+	<view class="padding bg-white">
+		<view class="chart">
+			<ec-canvas id="mychart-dom-line" canvas-id="mychart-line" ec="{{ec_csr}}"></ec-canvas>
+		</view>
 	</view>
 </view>

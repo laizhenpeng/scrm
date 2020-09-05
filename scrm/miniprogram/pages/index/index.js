@@ -57,13 +57,11 @@ Page({
     scanCode: function (e) {
         wx.scanCode({
             success(res) {
-                console.log(res)
+                wx.navigateTo({
+                  url: "/pages/result/result?link=" + res.result
+                })
             }
         });
-    },
-
-    shareInfo: function (e) {
-
     },
 
     /**
@@ -93,8 +91,10 @@ Page({
                 }
             })
 
-        db.collection("data").where({
-            openid: app.globalData.openid
+        let time = new Date()
+        db.collection("indexData").where({
+            openid: app.globalData.openid,
+            time: time.getFullYear().toString() + "-" + (time.getMonth() + 1).toString() + "-" + time.getDate().toString()
         })
             .get({
                 success: function (res) {
@@ -152,6 +152,9 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function () {
-
+        return {
+            title: '分享',
+            path: '/pages/index/index'
+        }
     }
 })

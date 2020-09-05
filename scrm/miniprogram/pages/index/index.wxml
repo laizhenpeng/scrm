@@ -69,4 +69,5 @@
 			<view class="label">{{functions[3].label}}</view>
 		</view>
 	</view>
+	<!-- <button class="shareBtn" open-type="share">分享</button> -->
 </view>
