@@ -4,9 +4,9 @@
 	<view slot="content">聊天</view>
 </cu-custom>
 
-<view class="cu-chat">
+<view class="cu-chat" id="chat">
 	<view wx:for="{{messages}}" wx:key="index">
-		<view wx:if="{{item.direction == 'to'}}" class="cu-item self">
+		<view wx:if="{{item.direction=='to'}}" class="cu-item self">
 			<view class="main">
 				<view class="content bg-green shadow">
 					<text>{{item.content}}</text>
@@ -27,13 +27,10 @@
 	</view>
 </view>
 <text>\n</text>
-<text>\n</text>
-<text>\n</text>
-<!-- 调整 -->
-<view class="cu-bar foot input {{InputBottom!=0?'cur':''}}">
+<view class="cu-bar foot input">
 	<view class="action">
-		<text class="cuIcon-right text-grey"></text>
-	</view>
-	<input class="solid-bottom" value="{{msg}}" bindfocus="InputFocus" bindblur="InputBlur" adjust-position="{{false}}" focus="{{false}}" maxlength="300" bindinput="messageInput" cursor-spacing="10"></input>
-	<button class="cu-btn bg-green shadow" bindtap="sendMsg">发送</button>
+    <text class="cuIcon-right text-grey"></text>
+  </view>
+  <input class="solid-bottom" bindfocus="InputFocus" bindblur="InputBlur" adjust-position="{{false}}" focus="{{false}}" maxlength="100" cursor-spacing="10" bindinput="contentInput" value="{{content}}"></input>
+  <button class="cu-btn bg-green shadow" style="width:50px" bindtap="sendMsg">发送</button>
 </view>

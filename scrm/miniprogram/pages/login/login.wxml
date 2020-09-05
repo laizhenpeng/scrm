@@ -1,0 +1,11 @@
+<!--pages/login/login.wxml-->
+<cu-custom bgColor="bg-gradual-blue">
+	<view slot="content">SCRM</view>
+</cu-custom>
+
+<view class="welcome">
+  欢迎使用SCRM小程序
+</view>
+<view class="flex solid-bottom padding justify-center">
+	<button class="cu-btn bg-blue shadow" style="width:80px" bindtap="enterApp">进入主页</button>
+</view>

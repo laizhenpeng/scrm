@@ -1,4 +1,6 @@
 // miniprogram/pages/detail/detail.js
+const app = getApp()
+
 Page({
 
     /**
@@ -8,6 +10,18 @@ Page({
         other_userInfo: {},
         other_detailedInfo: {},
         other_openid: ""
+    },
+
+    toChat: function (event) {
+        wx.navigateTo({
+            url: "/pages/chat/chat?other_openid=" + this.data.other_openid
+        })
+    },
+
+    makePhoneCall: function (event) {
+        wx.makePhoneCall({
+            phoneNumber: this.data.other_detailedInfo.phone
+        })
     },
 
     /**
@@ -20,6 +34,7 @@ Page({
 
         let that = this;
         const db = wx.cloud.database();
+
         db.collection('users').where({
             openid: that.data.other_openid
         })
@@ -30,6 +45,7 @@ Page({
                     })
                 }
             })
+            
         db.collection('userinfo').where({
             openid: that.data.other_openid
         })

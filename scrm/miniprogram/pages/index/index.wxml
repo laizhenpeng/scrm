@@ -4,15 +4,12 @@
 </cu-custom>
 
 <view class="padding-lr bg-white">
-	<view wx:if="{{isLogin}}" class="solid-bottom padding">
+	<view class="solid-bottom padding">
 		<view class="cu-avatar round lg margin-left" style="background-image:url({{userInfo.avatarUrl}})"></view>
 		<text wx:if="{{isEdit}}" class="text-xl margin-left-xl">{{detailedInfo.username}}</text>
 		<text wx:else class="text-xl margin-left-xl">{{userInfo.nickName}}</text>
 		<text wx:if="{{userInfo.gender=='1'}}" class="text-blue margin-left-xs">♂</text>
 		<text wx:else class="text-pink margin-left-xs" >♀</text>
-	</view>
-	<view wx:else class="flex solid-bottom padding justify-center">
-		<button class="cu-btn bg-blue shadow" open-type="getUserInfo" bindgetuserinfo="getUserInfo">获取个人信息</button>
 	</view>
 	<view wx:if="{{isEdit}}" class="padding-lr">
 		<view class="flex">
@@ -43,7 +40,7 @@
 	</view>
 </view>
 
-<view class="cu-list grid col-3">
+<view class="cu-list grid col-2">
 	<view class="cu-item" bindtap="toView">
 		<view class="cuIcon-cu-image">
 			<image class="icon" src="{{functions[0].icon}}"></image>
@@ -56,29 +53,20 @@
 		</view>
 		<view class="label">{{functions[1].label}}</view>
 	</view>
-	<!-- Todo: 名片模板 -->
-	<view class="cu-item" bindtap="toCard">
-		<view class="cuIcon-cu-image">
-			<image class="icon" src="{{functions[2].icon}}"></image>
-		</view>
-		<view class="label">{{functions[2].label}}</view>
-	</view>
-
 	<view class="cu-item">
 		<view bindtap="scanCode">
+			<view class="cuIcon-cu-image">
+				<image class="icon" src="{{functions[2].icon}}"></image>
+			</view>
+			<view class="label">{{functions[2].label}}</view>
+		</view>
+	</view>
+	<view class="cu-item">
+		<view bindtap="shareInfo">
 			<view class="cuIcon-cu-image">
 				<image class="icon" src="{{functions[3].icon}}"></image>
 			</view>
 			<view class="label">{{functions[3].label}}</view>
-		</view>
-	</view>
-
-	<view class="cu-item">
-		<view bindtap="shareInfo">
-			<view class="cuIcon-cu-image">
-				<image class="icon" src="{{functions[4].icon}}"></image>
-			</view>
-			<view class="label">{{functions[4].label}}</view>
 		</view>
 	</view>
 </view>

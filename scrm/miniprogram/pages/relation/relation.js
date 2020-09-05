@@ -24,13 +24,13 @@ Page({
 
     toChat: function (event) {
         wx.navigateTo({
-            url: "../chat/chat?other_openid=" + this.data.msgList[event.currentTarget.id].other_openid
+            url: "/pages/chat/chat?other_openid=" + this.data.msgList[event.currentTarget.id].other_openid
         })
     },
 
     toDetail: function (event) {
         wx.navigateTo({
-            url: "../detail/detail?other_openid=" + this.data.csrList[event.currentTarget.id].other_openid
+            url: "/pages/detail/detail?other_openid=" + this.data.csrList[event.currentTarget.id].other_openid
         })
     },
 
@@ -46,6 +46,7 @@ Page({
         const db = wx.cloud.database();
         const _ = db.command;
         const $ = _.aggregate;
+
         db.collection("records").aggregate()
             .match({
                 openid: app.globalData.openid,
@@ -53,7 +54,11 @@ Page({
             })
             .group({
                 _id: "$other_openid",
+                time: $.max('$time'),
                 num: $.sum(1)
+            })
+            .sort({
+                time: -1
             })
             .end({
                 success: function (res) {
@@ -80,6 +85,7 @@ Page({
                     }
                 }
             })
+            
         db.collection("records").where({
             openid: app.globalData.openid,
             type: "csr"

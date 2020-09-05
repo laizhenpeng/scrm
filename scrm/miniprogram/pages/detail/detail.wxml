@@ -18,6 +18,21 @@
 	</view>
 </view>
 
+<view class="cu-list grid col-2">
+	<view class="cu-item" bindtap="toChat">
+		<view class="cuIcon-cu-image">
+			<image class="icon" src="/images/chat.png"></image>
+		</view>
+		<view class="label">聊天</view>
+	</view>
+	<view class="cu-item" bindtap="makePhoneCall">
+		<view class="cuIcon-cu-image">
+			<image class="icon" src="/images/call.png"></image>
+		</view>
+		<view class="label">电话</view>
+	</view>
+</view>
+
 <view class="cu-list menu sm-border card-menu margin-top">
 	<view class="cu-item">
 		<view class="content">

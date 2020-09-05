@@ -1,1 +1,4 @@
 /* miniprogram/pages/user/user.wxss */
+.content {
+  text-align: center;
+}

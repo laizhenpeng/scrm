@@ -123,42 +123,49 @@ Page({
         if (isNaN(this.data.age)) {
             wx.showModal({
                 title: "信息提示",
-                content: "请正确填写年龄！"
+                content: "请正确填写年龄！",
+                showCancel: false
             })
         }
         else if (isNaN(this.data.phone)) {
             wx.showModal({
                 title: "信息提示",
-                content: "请正确填写手机号码！"
+                content: "请正确填写手机号码！",
+                showCancel: false
             })
         }
         else if (this.data.username == null || this.data.age == null || this.data.birthday == null || this.data.educationIndex == null) {
             wx.showModal({
                 title: "信息提示",
-                content: "请完整填写基本信息！"
+                content: "请完整填写基本信息！",
+                showCancel: false
             })
         }
         else if (this.data.company == null || this.data.title == null || this.data.school == null || this.data.department == null) {
             wx.showModal({
                 title: "信息提示",
-                content: "请完整填写背景资料！"
+                content: "请完整填写背景资料！",
+                showCancel: false
             })
         }
         else if (this.data.phone == null || this.data.email == null || this.data.address == null) {
             wx.showModal({
                 title: "信息提示",
-                content: "请完整填写联系方式！"
+                content: "请完整填写联系方式！",
+                showCancel: false
             })
         }
-        else if (this.data.introduction == null || this.data.length == 0) {
+        else if (this.data.length == 0) {
             wx.showModal({
                 title: "信息提示",
-                content: "请输入个人简介！"
+                content: "请输入个人简介！",
+                showCancel: false
             })
         }
         else {
             let that = this;
             const db = wx.cloud.database();
+            
             db.collection('userinfo').where({
                 openid: that.data.openid
             })
@@ -225,12 +232,14 @@ Page({
     },
 
     toIndex: function () {
+        this.hideModal()
         wx.navigateBack({
             delta: 1
         })
     },
 
     toView: function () {
+        this.hideModal()
         wx.redirectTo({
             url: "/pages/view/view"
         })

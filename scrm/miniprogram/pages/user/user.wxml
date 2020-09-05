@@ -7,6 +7,8 @@
 	<view class="solid-bottom padding">
 		<view class="cu-avatar round lg margin-left" style="background-image:url({{userInfo.avatarUrl}})"></view>
     <text class="text-xl margin-left-xl">{{detailedInfo.username}}</text>
+    <text wx:if="{{userInfo.gender=='1'}}" class="text-blue margin-left-xs">♂</text>
+		<text wx:else class="text-pink margin-left-xs" >♀</text>
 	</view>
 	<view class="padding-lr">
 		<view class="flex">
@@ -26,41 +28,29 @@
 </view>
 
 <view class="cu-list menu margin-top">
-  <view class="cu-item arrow menuBorder" bindtap="toTutorial">
+  <view class="cu-item menuBorder" bindtap="showToast">
     <view class="content">
       <text class="text-grey">系统设置</text>
     </view>
-    <view class="action">
-
-    </view>
   </view>
-  <view class="cu-item arrow menuBorder">
+  <view class="cu-item menuBorder" bindtap="showToast">
     <view class="content">
       <text class="text-grey">帮助中心</text>
     </view>
-    <view class="action">
-
-    </view>
   </view>
-  <view class="cu-item arrow menuBorder">
+  <view class="cu-item menuBorder" bindtap="showToast">
     <view class="content">
       <text class="text-grey">问题反馈</text>
     </view>
-    <view class="action">
-
-    </view>
   </view>
-  <view class="cu-item arrow menuBorder">
+  <view class="cu-item menuBorder" bindtap="showToast">
     <view class="content">
       <text class="text-grey">关于SCRM</text>
     </view>
-    <view class="action">
-
-    </view>
   </view>
 </view>
-<view class="padding flex flex-direction margin-bottom-xl">
-  <button class="cu-btn bg-grey lg" bindtap="logout">退出登录</button>
+<view class="padding flex flex-direction margin-top">
+  <button class="cu-btn bg-grey lg" style="width:100px" bindtap="logout">退出登录</button>
 </view>
 <view class="padding-lg">
 </view>

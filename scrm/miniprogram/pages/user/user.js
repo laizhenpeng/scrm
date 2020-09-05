@@ -11,14 +11,36 @@ Page({
         detailedInfo: {}
     },
 
+    showToast: function (e) {
+        wx.showToast({
+            title: "敬请期待",
+            icon: 'success',
+            duration: 1500
+        })
+    },
+
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        this.setData({
-            userInfo: app.globalData.userInfo,
-            detailedInfo: app.globalData.detailedInfo
-        })
+        if (!("username" in app.globalData.detailedInfo)) {
+            wx.showModal({
+                title: "信息提示",
+                content: "请完善个人信息！",
+                showCancel: false,
+                success: function (res) {
+                    wx.switchTab({
+                      url: '/pages/index/index',
+                    })
+                },
+            })
+        }
+        else {
+            this.setData({
+                userInfo: app.globalData.userInfo,
+                detailedInfo: app.globalData.detailedInfo
+            })
+        }
     },
 
     /**
