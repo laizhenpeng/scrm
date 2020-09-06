@@ -4,7 +4,7 @@
   "description": "scrm",
   "main": "login.js",
   "scripts": {
-    "build:weapp": "npm run build",
+    "build:weapp": "npm build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
