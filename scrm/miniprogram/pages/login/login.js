@@ -1,5 +1,9 @@
+/* eslint-disable eqeqeq */
+/* eslint-disable no-shadow */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 // pages/login/login.js
-const app = getApp()
+const app = getApp();
 
 Page({
 
@@ -8,18 +12,18 @@ Page({
    */
   data: {
     userInfo: {},
-    openid: ""
+    openid: '',
   },
 
-  enterApp: function (e) {
-    let that = this;
+  enterApp(e) {
+    const that = this;
     const db = wx.cloud.database();
 
-    db.collection("users").where({
-      openid: that.data.openid
+    db.collection('users').where({
+      openid: that.data.openid,
     })
       .get({
-        success: function (res) {
+        success(res) {
           if (res.data.length == 0) {
             db.collection('users').add({
               data: {
@@ -31,91 +35,90 @@ Page({
                 gender: that.data.userInfo.gender,
                 language: that.data.userInfo.language,
                 nickName: that.data.userInfo.nickName,
-                province: that.data.userInfo.province
+                province: that.data.userInfo.province,
               },
-              success: function (res) {
+              success(res) {
                 wx.switchTab({
-                  url: "/pages/index/index"
-                })
-              }
-            })
-          }
-          else {
+                  url: '/pages/index/index',
+                });
+              },
+            });
+          } else {
             wx.switchTab({
-              url: "/pages/index/index"
-            })
+              url: '/pages/index/index',
+            });
           }
-        }
-      })
+        },
+      });
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    if (!("avatarUrl" in app.globalData.userInfo)) {
-      app.userInfoCallbacks = res => {
+  onLoad(options) {
+    if (!('avatarUrl' in app.globalData.userInfo)) {
+      app.userInfoCallbacks = (res) => {
         this.setData({
-          userInfo: res.userInfo
-        })
-      }
+          userInfo: res.userInfo,
+        });
+      };
     }
-    
+
     if (!app.globalData.openid) {
-      app.openidCallbacks = res => {
+      app.openidCallbacks = (res) => {
         this.setData({
-          openid: res.result.openid
-        })
-      }
+          openid: res.result.openid,
+        });
+      };
     }
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage() {
 
-  }
-})
+  },
+});
