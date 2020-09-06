@@ -25,6 +25,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady() {
     if (!('username' in app.globalData.detailedInfo)) {
       wx.showModal({
         title: '信息提示',
@@ -42,13 +49,6 @@ Page({
         detailedInfo: app.globalData.detailedInfo,
       });
     }
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
   },
 
   /**

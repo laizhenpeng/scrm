@@ -79,21 +79,6 @@ Page({
     const that = this;
     const db = wx.cloud.database();
 
-    db.collection('userinfo').where({
-      openid: app.globalData.openid,
-    })
-      .get({
-        success(res) {
-          if (res.data.length != 0) {
-            app.globalData.detailedInfo = res.data[0];
-            that.setData({
-              detailedInfo: res.data[0],
-              isEdit: true,
-            });
-          }
-        },
-      });
-
     db.collection('data').where({
       openid: app.globalData.openid,
       page: 'index',
@@ -119,7 +104,23 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
+    const that = this;
+    const db = wx.cloud.database();
 
+    db.collection('userinfo').where({
+      openid: app.globalData.openid,
+    })
+      .get({
+        success(res) {
+          if (res.data.length != 0) {
+            app.globalData.detailedInfo = res.data[0];
+            that.setData({
+              detailedInfo: res.data[0],
+              isEdit: true,
+            });
+          }
+        },
+      });
   },
 
   /**

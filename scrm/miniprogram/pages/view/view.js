@@ -1,3 +1,5 @@
+/* eslint-disable eqeqeq */
+/* eslint-disable prefer-destructuring */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 // miniprogram/pages/view/view.js
@@ -17,10 +19,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    this.setData({
-      userInfo: app.globalData.userInfo,
-      detailedInfo: app.globalData.detailedInfo,
-    });
+
   },
 
   /**
@@ -34,7 +33,31 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
+    this.setData({
+      userInfo: app.globalData.userInfo,
+    });
+    if (app.globalData.detailedInfo) {
+      this.setData({
+        detailedInfo: app.globalData.detailedInfo,
+      });
+    } else {
+      const that = this;
+      const db = wx.cloud.database();
 
+      db.collection('userinfo').where({
+        openid: app.globalData.openid,
+      })
+        .get({
+          success(res) {
+            if (res.data.length != 0) {
+              app.globalData.detailedInfo = res.data[0];
+              that.setData({
+                detailedInfo: res.data[0],
+              });
+            }
+          },
+        });
+    }
   },
 
   /**

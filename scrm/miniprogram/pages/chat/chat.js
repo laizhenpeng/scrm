@@ -31,7 +31,6 @@ Page({
   },
 
   sendBtn() {
-    const time = new Date();
     if (this.data.length == 0) {
       wx.showModal({
         title: '信息提示',
@@ -42,6 +41,7 @@ Page({
       const that = this;
       const db = wx.cloud.database();
 
+      const time = new Date();
       db.collection('records').add({
         data: {
           openid: that.data.openid,
