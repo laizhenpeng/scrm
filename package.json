@@ -4,7 +4,8 @@
   "description": "scrm",
   "main": "login.js",
   "scripts": {
-    "test": "npm run lint"
+    "build:weapp": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
