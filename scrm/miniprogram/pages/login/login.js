@@ -27,7 +27,6 @@ Page({
           if (res.data.length == 0) {
             db.collection('users').add({
               data: {
-                _openid: that.data.openid,
                 openid: that.data.openid,
                 avatarUrl: that.data.userInfo.avatarUrl,
                 city: that.data.userInfo.city,
