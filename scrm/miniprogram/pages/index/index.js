@@ -16,7 +16,7 @@ Page({
             value: "0"
         }, {
             label: "今日新客户",
-            value: "0"
+            value: "5"
         }],
         functions: [{
             label: "查看",
@@ -91,10 +91,9 @@ Page({
                 }
             })
 
-        let time = new Date()
-        db.collection("indexData").where({
+        db.collection("data").where({
             openid: app.globalData.openid,
-            time: time.getFullYear().toString() + "-" + (time.getMonth() + 1).toString() + "-" + time.getDate().toString()
+            page: "index"
         })
             .get({
                 success: function (res) {

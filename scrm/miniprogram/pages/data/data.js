@@ -225,7 +225,8 @@ Page({
         const db = wx.cloud.database();
 
         db.collection('data').where({
-            openid: app.globalData.openid
+            openid: app.globalData.openid,
+            page: "data"
         })
             .get({
                 success: function (res) {
