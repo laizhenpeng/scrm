@@ -13,6 +13,15 @@ Page({
   data: {
     userInfo: {},
     openid: '',
+    isLogin: false,
+  },
+
+  getUserInfo(e) {
+    app.globalData.userInfo = e.detail.userInfo;
+    this.setData({
+      userInfo: e.detail.userInfo,
+      isLogin: true,
+    });
   },
 
   enterApp(e) {
@@ -83,7 +92,21 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
+    const that = this;
+    const db = wx.cloud.database();
 
+    db.collection('users').where({
+      openid: app.globalData.openid,
+    })
+      .get({
+        success(res) {
+          if (res.data.length != 0) {
+            that.setData({
+              isLogin: true,
+            });
+          }
+        },
+      });
   },
 
   /**

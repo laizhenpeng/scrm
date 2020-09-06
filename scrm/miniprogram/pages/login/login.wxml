@@ -6,6 +6,9 @@
 <view class="welcome">
   欢迎使用SCRM小程序
 </view>
-<view class="flex solid-bottom padding justify-center">
+<view wx:if="{{isLogin}}" class="flex solid-bottom padding justify-center">
 	<button class="cu-btn bg-blue shadow" style="width:100px" bindtap="enterApp">进入主页</button>
+</view>
+<view wx:else class="flex solid-bottom padding justify-center">
+	<button class="cu-btn bg-blue shadow" style="width:100px" open-type="getUserInfo" bindgetuserinfo="getUserInfo">获取信息</button>
 </view>
