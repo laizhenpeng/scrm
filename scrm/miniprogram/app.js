@@ -1,9 +1,27 @@
+/* eslint-disable import/no-unresolved */
 /* eslint-disable no-console */
 /* eslint-disable no-shadow */
 /* eslint-disable no-undef */
 // app.js
+const mta = require('mta_analysis.js');
+const fundebug = require('fundebug.1.3.1.min.js');
+
+mta.App.init({
+  appID: '500728949',
+  autoReport: true,
+  statParam: true,
+  ignoreParams: [],
+});
+
+fundebug.init(
+  {
+    apikey: 'f298f78a425b8d210497e19856326fadbf5e15aadcdbc5293644932a2c4c4f5a',
+  },
+);
+
 App({
   onLaunch() {
+    // fundebug.test();
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力');
     } else {
