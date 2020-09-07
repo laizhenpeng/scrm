@@ -68,8 +68,14 @@ Page({
       app.userInfoCallbacks = (res) => {
         this.setData({
           userInfo: res.userInfo,
+          isLogin: true,
         });
       };
+    } else {
+      this.setData({
+        userInfo: app.globalData.userInfo,
+        isLogin: true,
+      });
     }
 
     if (!app.globalData.openid) {
@@ -78,6 +84,10 @@ Page({
           openid: res.result.openid,
         });
       };
+    } else {
+      this.setData({
+        openid: app.globalData.openid,
+      });
     }
   },
 

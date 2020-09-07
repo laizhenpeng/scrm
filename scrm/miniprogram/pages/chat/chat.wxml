@@ -31,6 +31,6 @@
 	<view class="action">
     <text class="cuIcon-right text-grey"></text>
   </view>
-  <input class="solid-bottom" bindfocus="InputFocus" bindblur="InputBlur" adjust-position="{{false}}" focus="{{false}}" maxlength="100" cursor-spacing="10" bindinput="contentInput" value="{{content}}"></input>
-  <button class="cu-btn bg-green shadow" style="width:50px" bindtap="sendBtn">发送</button>
+  <input class="solid-bottom" adjust-position="{{false}}" focus="{{false}}" maxlength="100" cursor-spacing="10" bindinput="contentInput" value="{{content}}"></input>
+  <button class="cu-btn bg-green shadow" style="width:80px" bindtap="sendBtn">发送</button>
 </view>

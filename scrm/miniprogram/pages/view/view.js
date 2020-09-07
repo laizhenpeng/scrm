@@ -36,7 +36,7 @@ Page({
     this.setData({
       userInfo: app.globalData.userInfo,
     });
-    if (app.globalData.detailedInfo) {
+    if ('username' in app.globalData.detailedInfo) {
       this.setData({
         detailedInfo: app.globalData.detailedInfo,
       });
